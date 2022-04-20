@@ -1,0 +1,31 @@
+{
+  "name": "eatgnuv2",
+  "version": "1.0.0",
+  "description": "새롭게 변신한 eatGNU",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JangDongHo/eatGNUv2.git"
+  },
+  "scripts": {
+    "dev:servers": "nodemon"
+  },
+  "author": "JangDongho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JangDongHo/eatGNUv2/issues"
+  },
+  "homepage": "https://github.com/JangDongHo/eatGNUv2#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.3",
+    "puppeteer": "^13.5.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
