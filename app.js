@@ -22,7 +22,6 @@ const getRestaurantUrl = async () => {
   ).attr("data-cid");
   if (restaurantCid) {
     const url = `https://m.place.naver.com/restaurant/${restaurantCid}`;
-    console.log(url);
   }
   browser.close();
 };
