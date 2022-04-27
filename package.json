@@ -8,7 +8,8 @@
     "url": "git+https://github.com/JangDongHo/eatGNUv2.git"
   },
   "scripts": {
-    "dev:servers": "nodemon"
+    "dev:servers": "nodemon",
+    "addDB": "babel-node addDatabase/getRestaurant.js"
   },
   "author": "JangDongho",
   "license": "MIT",
@@ -19,7 +20,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "csv-parser": "^3.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0",
     "puppeteer": "^13.5.2"
   },
   "devDependencies": {
