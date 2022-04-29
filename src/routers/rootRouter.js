@@ -1,4 +1,5 @@
 import express from "express";
+import { home } from "../controllers/restaurantController";
 
 const rootRouter = express.Router();
 

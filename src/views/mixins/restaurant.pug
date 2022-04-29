@@ -1,0 +1,8 @@
+mixin restaurant(restaurant)
+  div
+    a(href="")
+      h2 #{restaurant.name}
+    p=restaurant.doromyeong
+    small #{restaurant.category.cate_1} |  
+    small #{restaurant.category.cate_2} | 
+    small #{restaurant.category.cate_3}

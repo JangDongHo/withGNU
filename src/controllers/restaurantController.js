@@ -1,5 +1,6 @@
 import Restaurant from "../models/Restaurant";
 
-export const home = (req, res) => {
-  return res.render("home");
+export const home = async (req, res) => {
+  const restaurants = await Restaurant.find({});
+  return res.render("home", { pageTitle: "Home", restaurants });
 };
