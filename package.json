@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev:servers": "nodemon",
-    "addDB": "babel-node addDatabase/getRestaurant.js"
+    "addDB": "babel-node addDatabase/getRestaurant.js",
+    "parser": "babel-node addDatabase/parser.js"
   },
   "author": "JangDongho",
   "license": "MIT",
