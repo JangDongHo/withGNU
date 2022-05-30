@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/JangDongHo/eatGNUv2/issues"
   },
-  "homepage": "https://github.com/JangDongHo/eatGNUv2#readme",
+  "homepage": "https://JangDongHo.github.io/eatGNUv2",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "csv-parser": "^3.0.0",
@@ -33,6 +33,7 @@
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "gh-pages": "^4.0.0",
     "nodemon": "^2.0.15"
   }
 }

@@ -2,7 +2,8 @@ extends base.pug
 include mixins/restaurant
 
 block content
-  each restaurant in restaurants
-    +restaurant(restaurant)
-  else
-    span No restaurants found
+  main
+    each restaurant in restaurants
+      +restaurant(restaurant)
+    else
+      span No restaurants found

@@ -1,6 +1,6 @@
 mixin restaurant(restaurant)
   div
-    a(href="")
+    a(href=`/restaurants/${restaurant._id}`)
       h2 #{restaurant.name}
     p=restaurant.doromyeong
     small #{restaurant.category.cate_1} |  
