@@ -3,7 +3,5 @@ include mixins/restaurant
 
 block content
   main
-    each restaurant in restaurants
-      +restaurant(restaurant)
-    else
-      span No restaurants found
+    a(href="/lists")
+      h1 한식
