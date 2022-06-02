@@ -14,7 +14,6 @@ export const search = async (req, res) => {
   if (type === "dessert") {
     filter["category.cate_1"] = "커피점/카페";
   }
-  console.log(filter);
   const restaurants = await Restaurant.find(filter);
   return res.render("restaurants/search", {
     pageTitle: "검색",
@@ -23,6 +22,7 @@ export const search = async (req, res) => {
 };
 
 export const info = async (req, res) => {
+  const { id } = req.params;
   const restaurant = await Restaurant.findById(id);
   return res.render("restaurants/info", {
     pageTitle: restaurant.name,
