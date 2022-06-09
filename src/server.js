@@ -11,7 +11,6 @@ app.use(logger);
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(localsMiddleware);
-app.use(email);
 app.use("/", rootRouter);
 app.use("/restaurants", restaurantsRouter);
 
