@@ -3,7 +3,9 @@ extends ../base
 block content
   main
     h1 경상국립대학교 학생 인증
-    form
+    form(method="POST")
       input(placeholder="ID" type="text")
       input(placeholder="PASSWORD" type="text")
       input(placeholder="인증번호" type="text")
+      button(formaction="api/join/emailAuth" formmethod="POST") 인증번호 전송
+      button 확인
