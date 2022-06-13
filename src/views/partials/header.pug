@@ -2,7 +2,11 @@ nav
   ul
     a(href="/")
       li 메인
-    a(href="/join")
-      li 회원가입
-    a(href="/login")
-      li 로그인
+    if loggedIn
+      a(href="/users/logout")
+        li 로그아웃
+    else
+      a(href="/join")
+        li 회원가입
+      a(href="/login")
+        li 로그인

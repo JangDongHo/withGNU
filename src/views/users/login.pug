@@ -1,0 +1,9 @@
+extends ../base
+
+block content
+  main
+    h1 경상국립대학교 학생 로그인
+    form(method="POST")
+      input(placeholder="ID" name="id" type="text", required)
+      input(placeholder="Password" name="password" type="text", required)
+      button 로그인

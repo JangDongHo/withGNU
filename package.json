@@ -19,6 +19,7 @@
   },
   "homepage": "https://JangDongHo.github.io/eatGNUv2",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cheerio": "^1.0.0-rc.10",
     "connect-mongo": "^4.6.0",
     "csv-parser": "^3.0.0",
