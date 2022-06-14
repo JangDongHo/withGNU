@@ -2,7 +2,7 @@ import Restaurant from "../models/Restaurant";
 
 export const home = async (req, res) => {
   const restaurants = await Restaurant.find({});
-  return res.render("home", { pageTitle: "Home", restaurants });
+  return res.render("home", { pageTitle: "홈", restaurants });
 };
 
 export const search = async (req, res) => {

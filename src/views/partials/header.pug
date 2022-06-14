@@ -3,6 +3,8 @@ nav
     a(href="/")
       li 메인
     if loggedIn
+      a(href=`/users/${loggedInUser._id}`)
+        li 프로필
       a(href="/users/logout")
         li 로그아웃
     else

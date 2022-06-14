@@ -84,7 +84,6 @@ export const emailAuth = async (req, res) => {
 };
 
 export const getJoin = (req, res) => {
-  console.log(req.session);
   return res.render("users/join/join-1", { pageTitle: "회원가입" });
 };
 
@@ -110,6 +109,15 @@ export const postLogin = async (req, res) => {
   req.session.loggedIn = true;
   req.session.user = user;
   return res.redirect("/");
+};
+
+export const profile = async (req, res) => {
+  const { id } = req.params;
+  const user = await Users.findById(id);
+  return res.render("users/profile", {
+    pageTitle: `${user.username}님의 프로필`,
+    user,
+  });
 };
 
 export const logout = (req, res) => {

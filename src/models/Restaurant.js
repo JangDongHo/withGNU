@@ -3,20 +3,21 @@ import mongoose from "mongoose";
 const restaurantSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   naver_map_url: { type: String, default: "" },
-  category: {
-    dong: { type: String, default: "" },
-    cate_1: { type: String, default: "" },
-    cate_2: { type: String, default: "" },
-  },
   info: {
-    main_photo_url: { type: String, default: "" },
+    campus: { type: String, default: "" },
+    category: { type: String, default: "" },
+    menu: { type: String, default: "" },
     location: { type: String, default: "" },
     contact: { type: String, default: "" },
-    opening_hours: { type: String, default: "" },
+    time: { type: String, default: "" },
   },
   meta: {
-    naver_star_point: { type: Number, default: 0 },
+    views: { type: Number, default: 0, required: true },
+    rating: { type: Number, default: 0, required: true },
   },
+  comments: [
+    { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
+  ],
 });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);

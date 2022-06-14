@@ -5,6 +5,12 @@ const usersSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  restaurant: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Restaurant",
+  },
 });
 
 usersSchema.pre("save", async function () {

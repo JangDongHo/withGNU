@@ -5,6 +5,7 @@ import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import restaurantsRouter from "./routers/restaurantsRouter";
+import userRouter from "./routers/userRouter";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
 
@@ -28,6 +29,7 @@ app.use(flash());
 app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/restaurants", restaurantsRouter);
+app.use("/users", userRouter);
 app.use("/api", apiRouter);
 
 export default app;
