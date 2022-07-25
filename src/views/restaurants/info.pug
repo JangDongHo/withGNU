@@ -14,8 +14,13 @@ block content
     if loggedIn
       div
         form
-          textarea(cols="30", rows="10", placeholder="리뷰 남기기")
-          button Add Comment
+          label(for="rating") 평점
+          input(type="range" min="1" max="5" id="rating" name="rating")
+          label(for="review") 리뷰
+          textarea(cols="30", rows="10", placeholder="악의적인 댓글은 무통보 삭제될 수 있습니다." id="review")
+          label(for="image") 사진
+          input(type="file" id="image", accept="image/*" multiple)
+          button 작성
   
     div
       ul
