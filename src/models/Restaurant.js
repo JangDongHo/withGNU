@@ -4,9 +4,7 @@ const restaurantSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   naver_map_url: { type: String, default: "" },
   info: {
-    campus: { type: String, default: "" },
-    category: { type: String, default: "" },
-    menu: { type: String, default: "" },
+    hashtags: [{ type: String, trim: true }],
     location: { type: String, default: "" },
     contact: { type: String, default: "" },
     time: { type: String, default: "" },
@@ -18,6 +16,12 @@ const restaurantSchema = new mongoose.Schema({
   comments: [
     { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
   ],
+});
+
+restaurantSchema.static("formatHashtags", function (hashtags) {
+  return hashtags
+    .split(",")
+    .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);

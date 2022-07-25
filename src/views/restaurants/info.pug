@@ -2,14 +2,26 @@ extends ../base.pug
 
 block content
   header
-    img(src=`${restaurant.info.main_photo_url}`)
   main
     h1=restaurant.name
-    span #{restaurant.category.dong} | 
-    small #{restaurant.category.cate_1}, #{restaurant.category.cate_2}
-    h2 
-      mark #{restaurant.meta.naver_star_point}
-      span  / 5.0
+    div 
+      each hashtag in restaurant.info.hashtags
+        small #{hashtag} 
     h3=restaurant.info.location
-    h3=restaurant.info.opening_hours
+    h3=restaurant.info.time
     h3=restaurant.info.contact
+
+    if loggedIn
+      div
+        form
+          textarea(cols="30", rows="10", placeholder="리뷰 남기기")
+          button Add Comment
+  
+    div
+      ul
+        each comment in restaurant.comments.reverse()
+          li(data-commentId=comment._id)
+            i.fas.fa-comment
+            span   #{comment.text}
+            if String(comment.owner) === String(loggedInUser._id)
+              span   ❌
