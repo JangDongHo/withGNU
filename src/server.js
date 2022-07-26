@@ -27,6 +27,7 @@ app.use(
 
 app.use(flash());
 app.use(localsMiddleware);
+app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/restaurants", restaurantsRouter);
 app.use("/users", userRouter);

@@ -13,13 +13,13 @@ block content
 
     if loggedIn
       div
-        form
-          label(for="rating") 평점
-          input(type="range" min="1" max="5" id="rating" name="rating")
-          label(for="review") 리뷰
-          textarea(cols="30", rows="10", placeholder="악의적인 댓글은 무통보 삭제될 수 있습니다." id="review")
-          label(for="image") 사진
-          input(type="file" id="image", accept="image/*" multiple)
+        form#commentForm
+          label(for="commentRating") 평점
+          input(type="range" min="1" max="5" id="commentRating" name="commentRating")
+          label(for="commentReview") 리뷰
+          textarea(cols="30", rows="10", placeholder="악의적인 리뷰는 무통보 삭제될 수 있습니다." id="commentReview")
+          label(for="commentImg") 사진
+          input(type="file" id="commentImg", accept="image/*" multiple)
           button 작성
   
     div
@@ -30,3 +30,5 @@ block content
             span   #{comment.text}
             if String(comment.owner) === String(loggedInUser._id)
               span   ❌
+block scripts
+  script(src="/static/js/commentSection.js")

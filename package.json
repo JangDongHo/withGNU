@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev:servers": "nodemon",
+    "dev:assets": "webpack --config webpack.config.js",
     "addDB": "babel-node addDatabase/getRestaurant.js",
     "parser": "babel-node addDatabase/parser.js"
   },
@@ -29,6 +30,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^6.3.1",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^6.7.5",
     "pug": "^3.0.2",
     "puppeteer": "^13.5.2"
@@ -38,6 +40,9 @@
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
-    "nodemon": "^2.0.15"
+    "babel-loader": "^8.2.5",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }
