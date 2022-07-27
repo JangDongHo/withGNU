@@ -13,13 +13,13 @@ block content
 
     if loggedIn
       div
-        form#commentForm
+        form(method="POST")#commentForm
           label(for="commentRating") 평점
           input(type="range" min="1" max="5" id="commentRating" name="commentRating")
           label(for="commentReview") 리뷰
-          textarea(cols="30", rows="10", placeholder="악의적인 리뷰는 무통보 삭제될 수 있습니다." id="commentReview")
+          textarea(cols="30", rows="10", placeholder="악의적인 리뷰는 무통보 삭제될 수 있습니다." id="commentReview" name="commentReview")
           label(for="commentImg") 사진
-          input(type="file" id="commentImg", accept="image/*" multiple)
+          input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
           button 작성
   
     div

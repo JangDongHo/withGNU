@@ -1,4 +1,6 @@
 import Restaurant from "../models/Restaurant";
+import Users from "../models/Users";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   const restaurants = await Restaurant.find({});
@@ -28,4 +30,30 @@ export const info = async (req, res) => {
     pageTitle: restaurant.name,
     restaurant,
   });
+};
+
+export const createComment = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { commentRating, commentReview, commentImg },
+    params: { id },
+  } = req;
+  try {
+    const newComment = await Comment.create({
+      text: commentReview,
+      owner: _id,
+      rating: commentRating,
+      restaurant: id,
+    });
+    const user = await Users.findById(_id);
+    user.comments.push(newComment._id);
+    user.save();
+    return res.redirect(`/restaurants/${id}`);
+  } catch (error) {
+    console.log(error);
+    req.flash("error", error);
+    return res.redirect("/");
+  }
 };

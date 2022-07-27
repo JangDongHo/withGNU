@@ -6,11 +6,13 @@ const usersSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-  restaurant: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "Restaurant",
-  },
+  restaurants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Restaurant",
+    },
+  ],
 });
 
 usersSchema.pre("save", async function () {
