@@ -27,7 +27,7 @@ block content
         each comment in restaurant.comments.reverse()
           li(data-commentId=comment._id)
             i.fas.fa-comment
-            span   #{comment.text}
+            span   #{comment.text} | #{comment.rating} | #{comment.owner.username} | #{comment.createdAt}
             if String(comment.owner) === String(loggedInUser._id)
               span   ❌
 block scripts

@@ -25,7 +25,10 @@ export const search = async (req, res) => {
 
 export const info = async (req, res) => {
   const { id } = req.params;
-  const restaurant = await Restaurant.findById(id);
+  const restaurant = await Restaurant.findById(id).populate({
+    path: "comments",
+    populate: { path: "owner" },
+  });
   return res.render("restaurants/info", {
     pageTitle: restaurant.name,
     restaurant,
@@ -50,6 +53,9 @@ export const createComment = async (req, res) => {
     const user = await Users.findById(_id);
     user.comments.push(newComment._id);
     user.save();
+    const restaurant = await Restaurant.findById(id);
+    restaurant.comments.push(newComment._id);
+    restaurant.save();
     return res.redirect(`/restaurants/${id}`);
   } catch (error) {
     console.log(error);
