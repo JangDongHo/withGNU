@@ -1,0 +1,23 @@
+header {
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid;
+  border-color: lightgrey;
+  .header__logo {
+    font-size: 27px;
+    span {
+      font-family: "Black Han Sans", sans-serif;
+      color: $main;
+    }
+  }
+  ul {
+    display: flex;
+    li {
+      margin-left: 20px;
+      font-size: 17px;
+    }
+  }
+}

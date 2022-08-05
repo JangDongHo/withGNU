@@ -1,14 +1,19 @@
-nav
-  ul
-    a(href="/")
-      li 메인
-    if loggedIn
-      a(href=`/users/${loggedInUser._id}`)
-        li 프로필
-      a(href="/users/logout")
-        li 로그아웃
-    else
-      a(href="/join")
-        li 회원가입
-      a(href="/login")
-        li 로그인
+header
+  a(link href="/").header__logo
+    span ㅇㅈㅇㅇ
+  nav
+    ul
+      if loggedIn
+        li
+          a(href=`/users/${loggedInUser._id}`)
+            i.fa-solid.fa-address-card.fa-lg
+        li
+          a(href="/users/logout")
+            i.fa-solid.fa-right-from-bracket
+      else
+        li
+          a(href="/join")
+            i.fa-solid.fa-user-plus
+        li
+          a(href="/login")
+            i.fa-solid.fa-right-to-bracket

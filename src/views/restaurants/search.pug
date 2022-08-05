@@ -2,8 +2,7 @@ extends ../base
 include ../mixins/restaurant
 
 block content
-  main
-    each restaurant in restaurants
-      +restaurant(restaurant)
-    else
-      span No restaurants found
+  each restaurant in restaurants
+    +restaurant(restaurant)
+  else
+    span No restaurants found
