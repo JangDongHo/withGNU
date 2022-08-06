@@ -1,5 +1,5 @@
 // Font
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;500;700&display=swap");
 
 // Config
 @import "./config/reset.scss";
@@ -8,13 +8,20 @@
 // Components
 @import "./components/header.scss";
 
+// Screens
+@import "./screens/info.scss";
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
-  background-color: white;
+  font-family: "Gothic A1", sans-serif;
+  background-color: #f8f8f8;
   color: black;
+}
+
+main {
+  padding: 30px;
 }
