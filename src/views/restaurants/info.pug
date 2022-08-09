@@ -3,43 +3,57 @@ extends ../base.pug
 block content
   div.info__header
     h1=restaurant.name
-    span=restaurant.info.location
-    i.fa-solid.fa-copy
-  
-  div.info__imageBox__Container
-  
-  div.info__map__Container
-    h2 #{restaurant.name}은 어디에 있나요?
-    div.info__map
-      img(src="https://images.velog.io/images/holim0/post/70b96b00-2464-4106-8c81-68b585736e6a/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94._001.png")
-
-  div.info__review__Container
-    h2 경대생들은 어떻게 생각하나요?
-
-  if loggedIn
     div
-      form(method="POST")#commentForm
-        label(for="commentRating") 평점
-        input(type="range" min="1" max="5" id="commentRating" name="commentRating")
-        label(for="commentReview") 리뷰
-        textarea(cols="30", rows="10", placeholder="악의적인 리뷰는 무통보 삭제될 수 있습니다." id="commentReview" name="commentReview")
-        label(for="commentImg") 사진
-        input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
-        button 작성
+      i.fa-solid.fa-location-dot
+      span.info__location=restaurant.info.location
+      i.fa-solid.fa-copy
+    div
+      i.fa-solid.fa-clock
+      span=restaurant.info.time
+    div
+      i.fa-solid.fa-phone
+      span=restaurant.info.contact
 
-  div
-    ul
-      each comment in restaurant.comments.reverse()
-        li(data-commentId=comment._id)
-          i.fas.fa-comment
-          span   #{comment.text} | #{comment.rating} | #{comment.owner.username} | #{comment.createdAt}
-          if String(comment.owner) === String(loggedInUser._id)
-            span   ❌
   div.info__hashtags
     each hashtag in restaurant.info.hashtags
       span #{hashtag} 
+  
+  div.info__imageBox__container
+  
+  div.info__map__container
+    h2 이 장소는 어디에 있나요?
+    div.info__map
+      img(src="https://images.velog.io/images/holim0/post/70b96b00-2464-4106-8c81-68b585736e6a/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94._001.png")
 
-  h3=restaurant.info.time
-  h3=restaurant.info.contact
+  div.info__review__container
+    h2 경대생들은 어떻게 생각하나요?
+    div
+      ul
+        each comment in restaurant.comments.reverse()
+          li(data-commentId=comment._id)
+            i.fas.fa-comment
+            span   #{comment.text} | #{comment.rating} | #{comment.owner.username} | #{comment.createdAt}
+            if String(comment.owner) === String(loggedInUser._id)
+              span   ❌
+
+    div.info__comment__container
+      h2 직접 의견을 남겨보세요!
+      form(method="POST")#commentForm
+        div.info__comment__rates
+          span
+            i.fa-solid.fa-face-frown-open.fa-lg
+          span
+            i.fa-solid.fa-face-frown.fa-lg
+          span
+            i.fa-solid.fa-face-meh.fa-lg
+          span
+            i.fa-solid.fa-face-grin-wide.fa-lg
+          span
+            i.fa-solid.fa-face-grin-stars.fa-lg
+        if loggedIn
+          textarea(name="commentReview", placeholder="의견을 남겨주세요.", required)
+          //label(for="commentImg") 사진
+          //input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
+          button(type=submit) 저장하기
 block scripts
   script(src="/static/js/commentSection.js")
