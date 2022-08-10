@@ -27,28 +27,47 @@ block content
 
   div.info__review__container
     h2 경대생들은 어떻게 생각하나요?
-    div
-      ul
-        each comment in restaurant.comments.reverse()
-          li(data-commentId=comment._id)
-            i.fas.fa-comment
-            span   #{comment.text} | #{comment.rating} | #{comment.owner.username} | #{comment.createdAt}
-            if String(comment.owner) === String(loggedInUser._id)
-              span   ❌
+    each comment in restaurant.comments.reverse()
+      div.info__review
+        div.info__review__profileContainer
+          div
+            a(href=`/users/${comment.owner._id}`)
+              img(src="https://img7.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P4.jpg")
+        div.info__review__mainContainer
+          p #{comment.owner.username}
+          p #{comment.text}
+          p #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
+        div.info__review__likeContainer
+          case comment.rating
+            when 1
+              i.fa-solid.fa-face-frown-open.fa-xl
+            when 2
+              i.fa-solid.fa-face-frown.fa-xl
+            when 3
+              i.fa-solid.fa-face-meh.fa-xl
+            when 4
+              i.fa-solid.fa-face-grin-wide.fa-xl
+            when 5
+              i.fa-solid.fa-face-grin-stars.fa-xl
 
     div.info__comment__container
       h2 직접 의견을 남겨보세요!
       form(method="POST")#commentForm
         div.info__comment__rates
-          span
+          input(type="radio", name="commentRating", value="1")#rate1.rateBtn
+          label(for="rate1")
             i.fa-solid.fa-face-frown-open.fa-lg
-          span
+          input(type="radio", name="commentRating", value="2")#rate2.rateBtn
+          label(for="rate2")
             i.fa-solid.fa-face-frown.fa-lg
-          span
+          input(type="radio", name="commentRating", value="3")#rate3.rateBtn
+          label(for="rate3")
             i.fa-solid.fa-face-meh.fa-lg
-          span
+          input(type="radio", name="commentRating", value="4")#rate4.rateBtn
+          label(for="rate4")
             i.fa-solid.fa-face-grin-wide.fa-lg
-          span
+          input(type="radio", name="commentRating", value="5")#rate5.rateBtn
+          label(for="rate5")
             i.fa-solid.fa-face-grin-stars.fa-lg
         if loggedIn
           textarea(name="commentReview", placeholder="의견을 남겨주세요.", required)

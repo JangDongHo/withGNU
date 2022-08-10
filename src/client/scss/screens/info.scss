@@ -81,6 +81,58 @@ h2 {
 }
 
 .info__review__container {
+  width: 100%;
+  max-width: 400px;
+  .info__review {
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px $gray;
+    display: flex;
+    word-break: break-all;
+    .info__review__profileContainer {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      div {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $main;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+    .info__review__mainContainer {
+      padding: 10px;
+      width: 80%;
+      p:first-of-type {
+        font-weight: 700;
+        font-size: $sm;
+        margin-bottom: 10px;
+      }
+      p:nth-of-type(2) {
+        font-size: $rg;
+        margin-bottom: 15px;
+      }
+      p:last-of-type {
+        font-size: 11px;
+        color: $gray;
+      }
+    }
+    .info__review__likeContainer {
+      padding: 20px;
+      display: flex;
+      justify-content: right;
+      color: $main;
+      i {
+      }
+    }
+  }
 }
 
 .info__comment__container {
@@ -91,10 +143,14 @@ h2 {
     margin-bottom: 20px;
     justify-content: space-between;
     align-items: center;
-    span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .rateBtn {
+      display: none;
+    }
+    .rateBtn:checked + label {
+      background-color: $main;
+      color: white;
+    }
+    label {
       width: 60px;
       height: 60px;
       background-color: white;
@@ -103,8 +159,15 @@ h2 {
       color: $main;
       transition-duration: 0.4s;
       cursor: pointer;
+      i {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
-    span:hover {
+    label:hover {
       background-color: $main;
       color: white;
     }
@@ -120,7 +183,7 @@ h2 {
   }
   button {
     width: 100%;
-    height: 60px;
+    height: 50px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 2px 2px 5px $gray;

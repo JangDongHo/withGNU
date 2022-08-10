@@ -1,14 +1,23 @@
-import fetch from "node-fetch";
+const rates = document.querySelector(".info__comment__rates");
+const rateBtns = document.querySelectorAll("#rateBtn");
 
-const form = document.getElementById("commentForm");
-
-const handleSubmit = (event) => {
-  //event.preventDefault();
-  const rating = document.getElementById("commentRating").value;
-  const text = document.querySelector("textarea").value;
-  const fileUrl = document.getElementById("commentImg").value;
+const addRateBtnEvent = () => {
+  rateBtns.forEach((btn) => {
+    btn.addEventListener("click", handleRateBtn);
+  });
 };
 
-if (form) {
-  form.addEventListener("submit", handleSubmit);
-}
+const handleRateBtn = (event) => {
+  /*
+  const {
+    target: {
+      parentElement: {
+        dataset: { rate },
+      },
+    },
+  } = event;
+  rates.dataset.rate = rate;
+  */
+};
+
+addRateBtnEvent();

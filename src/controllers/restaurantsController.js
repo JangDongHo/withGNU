@@ -40,7 +40,7 @@ export const createComment = async (req, res) => {
     session: {
       user: { _id },
     },
-    body: { commentRating, commentReview, commentImg },
+    body: { commentReview, commentRating },
     params: { id },
   } = req;
   try {
