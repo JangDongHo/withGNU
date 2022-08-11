@@ -71,8 +71,12 @@ block content
             i.fa-solid.fa-face-grin-stars.fa-lg
         if loggedIn
           textarea(name="commentReview", placeholder="의견을 남겨주세요.", required)
-          //label(for="commentImg") 사진
-          //input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
+          div.info__comment__images
+            label(for="commentImg")
+              div
+                p +
+                span 장소와 관련된 이미지를 첨부해주세요.
+            input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
           button(type=submit) 저장하기
 block scripts
   script(src="/static/js/commentSection.js")
