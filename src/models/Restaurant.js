@@ -16,6 +16,7 @@ const restaurantSchema = new mongoose.Schema({
   comments: [
     { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
   ],
+  photoUrl: [{ type: String }],
 });
 
 restaurantSchema.static("formatHashtags", function (hashtags) {

@@ -19,6 +19,8 @@ block content
       span #{hashtag} 
   
   div.info__imageBox__container
+    each photo in restaurant.photoUrl
+      img(src=`/${photo}`)
   
   div.info__map__container
     h2 이 장소는 어디에 있나요?
@@ -52,7 +54,7 @@ block content
 
     div.info__comment__container
       h2 직접 의견을 남겨보세요!
-      form(method="POST")#commentForm
+      form(method="POST", enctype="multipart/form-data")#commentForm
         div.info__comment__rates
           input(type="radio", name="commentRating", value="1")#rate1.rateBtn
           label(for="rate1")

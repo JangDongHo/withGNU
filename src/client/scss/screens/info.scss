@@ -40,6 +40,10 @@ h2 {
   height: 160px;
   background-color: $midgray;
   margin-bottom: 30px;
+  img {
+    width: 160px;
+    height: 100%;
+  }
 }
 
 .info__hashtags {

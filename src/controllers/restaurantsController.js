@@ -42,19 +42,30 @@ export const createComment = async (req, res) => {
     },
     body: { commentReview, commentRating },
     params: { id },
+    files: { commentImg },
   } = req;
+  const filePaths = [];
+  if (commentImg) {
+    for (let i = 0; i < commentImg.length; i++) {
+      filePaths.push(commentImg[i].path);
+    }
+  }
   try {
     const newComment = await Comment.create({
       text: commentReview,
       owner: _id,
       rating: commentRating,
       restaurant: id,
+      photoUrl: filePaths,
     });
     const user = await Users.findById(_id);
     user.comments.push(newComment._id);
     user.save();
     const restaurant = await Restaurant.findById(id);
     restaurant.comments.push(newComment._id);
+    filePaths.forEach((filePath) => {
+      restaurant.photoUrl.push(filePath);
+    });
     restaurant.save();
     return res.redirect(`/restaurants/${id}`);
   } catch (error) {
