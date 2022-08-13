@@ -35,14 +35,18 @@ h2 {
 }
 
 .info__imageBox__container {
-  max-width: 400px;
+  display: flex;
   width: 100%;
   height: 160px;
   background-color: $midgray;
   margin-bottom: 30px;
+  overflow: auto;
   img {
     width: 160px;
     height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    margin-right: 5px;
   }
 }
 
@@ -67,9 +71,19 @@ h2 {
   }
 }
 
+#clickArea {
+  display: none;
+}
+.side__container {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+}
+
 .info__map__container {
+  max-width: 400px;
   .info__map {
-    max-width: 400px;
     width: 100%;
     height: 160px;
     background-color: $midgray;
@@ -133,13 +147,12 @@ h2 {
       display: flex;
       justify-content: right;
       color: $main;
-      i {
-      }
     }
   }
 }
 
 .info__comment__container {
+  margin-bottom: 40px;
   max-width: 400px;
   width: 100%;
   .info__comment__rates {
@@ -223,7 +236,8 @@ h2 {
   button {
     width: 100%;
     height: 50px;
-    background-color: white;
+    background-color: $gray;
+    color: $midgray;
     border-radius: 20px;
     box-shadow: 2px 2px 5px $gray;
     border: none;

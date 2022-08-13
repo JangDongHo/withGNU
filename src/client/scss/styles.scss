@@ -10,6 +10,7 @@
 
 // Screens
 @import "./screens/info.scss";
+@import "./screens/home.scss";
 
 a {
   color: inherit;
@@ -20,8 +21,19 @@ body {
   font-family: "Gothic A1", sans-serif;
   background-color: #f8f8f8;
   color: black;
+  position: relative;
 }
 
 main {
   padding: 30px;
+  //background-color: beige;
+  max-width: 90vw;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media all and (min-width: 900px) {
+  main {
+    max-width: 60vw;
+  }
 }

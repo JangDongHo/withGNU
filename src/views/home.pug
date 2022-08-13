@@ -2,6 +2,15 @@ extends base
 include mixins/restaurant
 
 block content
+  div.topScreen__Background
+  div.topScreen__Container
+    h1 우리 오늘 어디갈까?
+    form(action="/search" method="GET")
+      div
+        input(type="text" name="search" placeholder="캠퍼스, 식당 또는 장소")
+        button(name="search")
+          i.fa-solid.fa-magnifying-glass.fa-2x
+
   form(action="/search" method="GET")
     select(id="campus" name="campus")
       option(value="") 캠퍼스를 선택하세요.
