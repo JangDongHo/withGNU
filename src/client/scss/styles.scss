@@ -4,9 +4,11 @@
 // Config
 @import "./config/reset.scss";
 @import "./config/variables.scss";
+@import "./config/mediaquery.scss";
 
 // Components
 @import "./components/header.scss";
+@import "./components/tags.scss";
 
 // Screens
 @import "./screens/info.scss";
@@ -19,21 +21,18 @@ a {
 
 body {
   font-family: "Gothic A1", sans-serif;
-  background-color: #f8f8f8;
   color: black;
+  background-color: white;
   position: relative;
-}
-
-main {
-  padding: 30px;
-  //background-color: beige;
-  max-width: 90vw;
-  width: 100%;
+  padding: 0 30px;
   margin: 0 auto;
 }
 
-@media all and (min-width: 900px) {
-  main {
-    max-width: 60vw;
-  }
+main {
+  padding-top: 100px;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
 }

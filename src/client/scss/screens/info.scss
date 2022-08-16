@@ -52,23 +52,7 @@ h2 {
 
 .info__hashtags {
   margin-bottom: 40px;
-  span {
-    padding: 10px;
-    width: 5px;
-    height: 3px;
-    border-radius: 20px;
-    background-color: white;
-    margin-right: 10px;
-    font-size: $sm;
-    color: gray;
-    box-shadow: $shadow $gray;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  span:hover {
-    background-color: $main;
-    color: white;
-  }
+  @include hashtag;
 }
 
 #clickArea {
@@ -79,6 +63,11 @@ h2 {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+  @include mobile {
+    //max-width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .info__map__container {

@@ -1,0 +1,19 @@
+@mixin hashtag {
+  span {
+    padding: 10px;
+    width: 5px;
+    height: 3px;
+    border-radius: 20px;
+    background-color: white;
+    margin-right: 10px;
+    font-size: $sm;
+    color: gray;
+    box-shadow: $shadow $gray;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    &:hover {
+      background-color: $main;
+      color: white;
+    }
+  }
+}

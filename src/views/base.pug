@@ -4,6 +4,7 @@ doctype html
 html(lang="ko")
   head 
     title #{pageTitle} | #{siteName}
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="/static/css/styles.css")
   body
     if messages.error
@@ -13,7 +14,7 @@ html(lang="ko")
     if messages.success
       +message("sucess", messages.success)
     include partials/header
-  main
-    block content
+    main
+      block content
   script(src="https://kit.fontawesome.com/b7f69e0a07.js" crossorigin="anonymous")
   block scripts
