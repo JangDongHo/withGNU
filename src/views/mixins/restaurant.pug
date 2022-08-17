@@ -1,4 +1,5 @@
 mixin restaurant(restaurant)
-  div
-    a(href=`/restaurants/${restaurant._id}`)
-      h2 #{restaurant.name}
+  a(href=`/restaurants/${restaurant._id}`)
+    div.placeBox
+      img(src=`${restaurant.photoUrl[0]}`)
+      span #{restaurant.name}

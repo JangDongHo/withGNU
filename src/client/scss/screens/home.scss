@@ -45,6 +45,14 @@
       cursor: pointer;
     }
   }
+  .hashtags__wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    @include hashtag;
+    margin-top: 50px;
+  }
 }
 
 .main__Container {

@@ -3,23 +3,21 @@ import Users from "../models/Users";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
-  const restaurants = await Restaurant.find({});
-  return res.render("home", { pageTitle: "홈", restaurants });
+  const places = await Restaurant.find({});
+  const tmp = [];
+  places.forEach((place) => {
+    tmp.push(...place.info.hashtags);
+  });
+  const hashtags = [...new Set(tmp)];
+  return res.render("home", { pageTitle: "홈", hashtags });
 };
 
 export const search = async (req, res) => {
-  const { campus, type } = req.query;
-  let filter = {};
-  if (campus) {
-    filter["category.dong"] = campus;
-  }
-  if (type === "dessert") {
-    filter["category.cate_1"] = "커피점/카페";
-  }
-  const restaurants = await Restaurant.find(filter);
+  const { search } = req.query;
+  const places = await Restaurant.find();
   return res.render("restaurants/search", {
     pageTitle: "검색",
-    restaurants,
+    places,
   });
 };
 

@@ -9,10 +9,12 @@
 // Components
 @import "./components/header.scss";
 @import "./components/tags.scss";
+@import "./components/placebox.scss";
 
 // Screens
 @import "./screens/info.scss";
 @import "./screens/home.scss";
+@import "./screens/search.scss";
 
 a {
   color: inherit;

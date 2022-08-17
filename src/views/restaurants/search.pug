@@ -2,7 +2,10 @@ extends ../base
 include ../mixins/restaurant
 
 block content
-  each restaurant in restaurants
-    +restaurant(restaurant)
-  else
-    span No restaurants found
+  div.placeBox-wrapper
+    each place in places
+      +restaurant(place)
+    else
+      span No places found
+block scripts
+  script(src="/static/js/placebox.js")
