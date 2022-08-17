@@ -13,17 +13,15 @@ block content
   div.main__Container
     h1 요즘 뜨는 장소들
     h3 윗지앤유에서 사랑 받고 있는 장소들입니다.
-    div.placeBox__Container.slide-wrapper
-      ul.slides 
-        li
-        li 
-        li 
-        li
-        li
-        li
-    p.slide-controls
-      span.slidePrev prev
-      span.slideNext next
+    div.placeBox__Container
+      div
+      div
+      div
+      div
+      div
+      div
+      div
+      div
   
   div.hidden
     form(action="/search" method="GET")
@@ -35,6 +33,3 @@ block content
       button(name="type" value="dessert") 카페/디저트
       button(name="type" value="bar") 술집/바
       button(name="type" value="delivery") 배달
-
-block scripts
-  script(src="/static/js/slider.js")

@@ -2,7 +2,11 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: $main;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 138, 65, 1) 100%
+  );
   width: 100%;
   height: 100em;
   z-index: -1;
@@ -55,35 +59,29 @@
     color: rgb(255, 218, 8);
     margin-bottom: 15px;
   }
-  .slide-wrapper {
-    position: relative;
-    margin: 0 auto;
-    height: 100px;
-    overflow: hidden;
-    .slides {
-      display: flex;
-      position: absolute;
-      left: 0;
-      top: 0;
-      transition: 0.5s ease-out;
-      li {
-        width: 100px;
-        height: 100px;
-        background-color: white;
-      }
-      li:not(:last-child) {
-        margin-right: 10px;
-      }
+  .placeBox__Container {
+    width: 100%;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    @include laptop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-  }
-  .slide-controls {
-    text-align: center;
-    margin-top: 50px;
-    span {
-      background: #333;
-      color: #fff;
-      padding: 10px 20px;
-      margin: 0 10px;
+    @include tablet {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @include mobile {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 15px;
+    }
+    div {
+      height: 150px;
+      background-color: white;
+      box-shadow: $lightshadow;
+      border-radius: 20px;
+      cursor: pointer;
     }
   }
   /*
