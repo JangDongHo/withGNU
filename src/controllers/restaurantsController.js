@@ -23,13 +23,15 @@ export const search = async (req, res) => {
 
 export const info = async (req, res) => {
   const { id } = req.params;
-  const restaurant = await Restaurant.findById(id).populate({
+  const place = await Restaurant.findById(id).populate({
     path: "comments",
     populate: { path: "owner" },
   });
+  place.meta.views += 1;
+  await place.save();
   return res.render("restaurants/info", {
-    pageTitle: restaurant.name,
-    restaurant,
+    pageTitle: place.name,
+    place,
   });
 };
 
@@ -64,6 +66,11 @@ export const createComment = async (req, res) => {
     filePaths.forEach((filePath) => {
       restaurant.photoUrl.push(filePath);
     });
+    // 식당 평점 계산
+    restaurant.meta.rating = (
+      (restaurant.meta.rating + Number(commentRating)) /
+      restaurant.comments.length
+    ).toFixed(1);
     restaurant.save();
     return res.redirect(`/restaurants/${id}`);
   } catch (error) {

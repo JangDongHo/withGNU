@@ -1,89 +1,38 @@
 extends ../base.pug
 
 block content
-  div.info__wrapper
-    div.info__header
-      h1=restaurant.name
-      div
-        i.fa-solid.fa-location-dot
-        span.info__location=restaurant.info.location
-        i.fa-solid.fa-copy
-      div
-        i.fa-solid.fa-clock
-        span=restaurant.info.time
-      div
-        i.fa-solid.fa-phone
-        span=restaurant.info.contact
-
-    div.info__hashtags
-      each hashtag in restaurant.info.hashtags
-        span #{hashtag} 
-    
-    div.info__imageBox__container
-      each photo in restaurant.photoUrl
-        img(src=`/${photo}`)
-    
-    div.side__container
-      div.left__container
-        div.info__map__container
-          h2 이 장소는 어디에 있나요?
-          div.info__map
-            img(src="https://images.velog.io/images/holim0/post/70b96b00-2464-4106-8c81-68b585736e6a/%EC%A0%9C%EB%AA%A9%EC%9D%84%20%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94._001.png")
-        
-        div.info__comment__container
-            h2 직접 의견을 남겨보세요!
-            form(method="POST", enctype="multipart/form-data")#commentForm
-              div.info__comment__rates
-                input(type="radio", name="commentRating", value="1")#rate1.rateBtn
-                label(for="rate1")
-                  i.fa-solid.fa-face-frown-open.fa-lg
-                input(type="radio", name="commentRating", value="2")#rate2.rateBtn
-                label(for="rate2")
-                  i.fa-solid.fa-face-frown.fa-lg
-                input(type="radio", name="commentRating", value="3")#rate3.rateBtn
-                label(for="rate3")
-                  i.fa-solid.fa-face-meh.fa-lg
-                input(type="radio", name="commentRating", value="4")#rate4.rateBtn
-                label(for="rate4")
-                  i.fa-solid.fa-face-grin-wide.fa-lg
-                input(type="radio", name="commentRating", value="5")#rate5.rateBtn
-                label(for="rate5")
-                  i.fa-solid.fa-face-grin-stars.fa-lg
-              div#clickArea
-                if loggedIn
-                  textarea(name="commentReview", placeholder="의견을 남겨주세요.", required)
-                  div.info__comment__images
-                    label(for="commentImg")
-                      div
-                        p +
-                        span 장소와 관련된 이미지를 첨부해주세요.
-                    input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
-                  button(type=submit disabled="true")#commentSubmitBtn 저장하기
-      
-      div.right__container
-        div.info__review__container
-          h2 경대생들은 어떻게 생각하나요?
-          each comment in restaurant.comments.reverse()
-            div.info__review
-              div.info__review__profileContainer
-                div
-                  a(href=`/users/${comment.owner._id}`)
-                    img(src="https://img7.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P4.jpg")
-              div.info__review__mainContainer
-                p #{comment.owner.username}
-                p #{comment.text}
-                p #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
-              div.info__review__likeContainer
-                case comment.rating
-                  when 1
-                    i.fa-solid.fa-face-frown-open.fa-xl
-                  when 2
-                    i.fa-solid.fa-face-frown.fa-xl
-                  when 3
-                    i.fa-solid.fa-face-meh.fa-xl
-                  when 4
-                    i.fa-solid.fa-face-grin-wide.fa-xl
-                  when 5
-                    i.fa-solid.fa-face-grin-stars.fa-xl
+  div.placeImg-wrapper
+    img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
+    img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
+    img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
+    img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
+    img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
+  section.placeInfo-wrapper
+    header.placeInfo-header
+      div.placeInfo-header__title
+        h1.title=place.name
+        div.like-wrapper
+          i.fa-regular.fa-thumbs-up
+          span 좋아요
+      div.etcs-wrapper
+        i.fa-solid.fa-eye
+        span  #{place.meta.views}
+        i.fa-solid.fa-pencil
+        span  #{place.comments.length}
+    div.map-layer
+    div.info-wrapper
+      div.infos
+        span=place.info.location
+        i.fa-regular.fa-copy
+      div.infos
+        span=place.info.contact
+      p.infos-etcs
+        span 영업시간
+        span=place.info.time
+    div.hashtags-wrapper
+      each hashtag in place.info.hashtags
+        span.hashtag=hashtag
+    div.placeReview-wrapper
+      div.placeReviews
 block scripts
   script(src="/static/js/commentSection.js")

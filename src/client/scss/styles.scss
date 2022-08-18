@@ -21,21 +21,33 @@ a {
   text-decoration: none;
 }
 
+html {
+  font-size: 15px;
+  @include laptop {
+    font-size: 14px;
+  }
+  @include tablet {
+    font-size: 12px;
+  }
+  @include mobile {
+    font-size: 10px;
+  }
+}
+
 body {
   font-family: "Gothic A1", sans-serif;
   color: black;
   background-color: white;
   position: relative;
-  padding: 0 20%;
-  margin: 0 auto;
+  padding: 0 250px;
+  @include laptopL {
+    padding: 0 5rem;
+  }
   @include laptop {
-    padding: 0 100px;
+    padding: 0 2rem;
   }
   @include tablet {
-    padding: 0 50px;
-  }
-  @include mobile {
-    padding: 0 30px;
+    padding: 0 1.5rem;
   }
 }
 

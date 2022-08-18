@@ -20,7 +20,7 @@
     font-family: "Black Han Sans", sans-serif;
     margin-bottom: 30px;
     color: white;
-    font-size: 32px;
+    font-size: 3.2rem;
   }
   form {
     div {
@@ -92,21 +92,4 @@
       cursor: pointer;
     }
   }
-  /*
-  .placeBox__Container {
-    display: flex;
-    overflow: auto;
-    gap: 10px;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    div {
-      flex-shrink: 0;
-      width: 200px;
-      height: 100px;
-      border-radius: 20px;
-      background-color: white;
-    }
-  }
-  */
 }

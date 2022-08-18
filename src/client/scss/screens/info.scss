@@ -1,240 +1,109 @@
-h2 {
-  font-size: $rg;
-  font-weight: 500;
-  margin-bottom: 20px;
-  color: dimgrey;
-}
-
-.info__header {
-  margin-bottom: 30px;
-  h1 {
-    color: $main;
-    font-size: $lg;
-    font-weight: 700;
-    margin-bottom: 13px;
-  }
-  div:first-of-type {
-    margin-bottom: 15px;
-  }
-  span {
-    color: $gray;
-    font-size: $sm;
-  }
-  i {
-    color: $main;
-    margin-right: 10px;
-    font-size: $sm;
-  }
-  .info__location {
-    border-bottom: solid rgb(232, 232, 232);
-  }
-  .fa-copy {
-    color: $gray;
-    margin-left: 5px;
-  }
-}
-
-.info__imageBox__container {
+.placeImg-wrapper {
+  width: 100%;
   display: flex;
-  width: 100%;
-  height: 160px;
-  background-color: $midgray;
-  margin-bottom: 30px;
-  overflow: auto;
-  img {
-    width: 160px;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-}
-
-.info__hashtags {
-  margin-bottom: 40px;
-  @include hashtag;
-}
-
-#clickArea {
-  display: none;
-}
-.side__container {
-  width: 100%;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, auto));
-  @include mobile {
-    //max-width: 300px;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.info__map__container {
-  max-width: 400px;
-  .info__map {
-    width: 100%;
-    height: 160px;
-    background-color: $midgray;
-    margin-bottom: 30px;
-    border-radius: 20px;
-    box-shadow: $shadow $gray;
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 20px;
+  overflow-x: auto;
+  margin-bottom: 4rem;
+  .placeImg {
+    width: 400px;
+    height: 320px;
+    @include tablet {
+      width: 17rem;
+      height: 15rem;
     }
   }
 }
 
-.info__review__container {
-  width: 100%;
-  max-width: 400px;
-  .info__review {
-    margin-bottom: 20px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: $shadow $gray;
-    display: flex;
-    word-break: break-all;
-    .info__review__profileContainer {
-      width: 10%;
+.placeInfo-wrapper {
+  width: 65%;
+  @include laptopL {
+    width: 70%;
+  }
+  @include laptop {
+    width: 80%;
+  }
+  @include tablet {
+    width: 100%;
+  }
+  .placeInfo-header {
+    border-bottom: solid $lightgray;
+    margin-bottom: 2rem;
+    &__title {
       display: flex;
-      justify-content: center;
-      padding: 10px;
-      div {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: $main;
-        img {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
+      justify-content: space-between;
+      .title {
+        font-size: 30px;
+        @include mobile {
+          font-size: 25px;
         }
       }
-    }
-    .info__review__mainContainer {
-      padding: 10px;
-      width: 80%;
-      p:first-of-type {
-        font-weight: 700;
-        font-size: $sm;
-        margin-bottom: 10px;
-      }
-      p:nth-of-type(2) {
-        font-size: $rg;
-        margin-bottom: 15px;
-      }
-      p:last-of-type {
-        font-size: 11px;
-        color: $gray;
-      }
-    }
-    .info__review__likeContainer {
-      padding: 20px;
-      display: flex;
-      justify-content: right;
-      color: $main;
-    }
-  }
-}
-
-.info__comment__container {
-  margin-bottom: 40px;
-  max-width: 400px;
-  width: 100%;
-  .info__comment__rates {
-    display: flex;
-    margin-bottom: 20px;
-    justify-content: space-between;
-    align-items: center;
-    .rateBtn {
-      display: none;
-    }
-    .rateBtn:checked + label {
-      background-color: $main;
-      color: white;
-    }
-    label {
-      width: 60px;
-      height: 60px;
-      background-color: white;
-      border-radius: 20px;
-      box-shadow: $shadow $gray;
-      color: $main;
-      transition-duration: 0.4s;
-      cursor: pointer;
-      i {
-        width: 100%;
-        height: 100%;
+      .like-wrapper {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-      }
-    }
-    label:hover {
-      background-color: $main;
-      color: white;
-    }
-  }
-  textarea {
-    width: 90%;
-    height: 100px;
-    border-radius: 20px;
-    box-shadow: $shadow $gray;
-    border: none;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .info__comment__images {
-    display: flex;
-    justify-content: space-between;
-    label:hover {
-      background-color: $blue;
-      color: white;
-    }
-    label {
-      background-color: $midgray;
-      display: block;
-      width: 100%;
-      height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: $shadow $gray;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      color: gray;
-      transition-duration: 0.4s;
-      cursor: pointer;
-      div {
-        text-align: center;
-        p {
-          font-size: $lg;
+        color: gray;
+        font-size: 40px;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          color: $main;
+        }
+        @include mobile {
+          font-size: 30px;
+        }
+        i {
+          font-size: 1em;
+          margin-bottom: 1rem;
         }
         span {
-          font-size: $sm;
+          font-size: 0.4em;
         }
       }
     }
-    input {
-      display: none;
+    .etcs-wrapper {
+      margin-bottom: 1.5rem;
+      color: $gray;
+      span {
+        margin-right: 1.5rem;
+      }
     }
   }
-  button {
+  .map-layer {
     width: 100%;
-    height: 50px;
-    background-color: $gray;
-    color: $midgray;
-    border-radius: 20px;
-    box-shadow: 2px 2px 5px $gray;
-    border: none;
-    transition-duration: 0.4s;
-    cursor: pointer;
+    height: 13rem;
+    background-color: lightgray;
   }
-  button:hover {
-    background-color: $main;
-    color: white;
+  .info-wrapper {
+    font-size: 15px;
+    .infos {
+      padding: 22px 15px;
+      border: solid $lightgray;
+      &:first-child {
+        margin-bottom: 1rem;
+      }
+      span {
+        margin-right: 0.5rem;
+      }
+    }
+    .infos-etcs {
+      margin-top: 2.5rem;
+      padding: 0.5rem;
+      padding-bottom: 5rem;
+      border-bottom: solid $lightgray;
+      margin-bottom: 2.5rem;
+      span {
+        &:first-child {
+          margin-right: 1.3rem;
+          color: gray;
+        }
+      }
+    }
+  }
+  .hashtags-wrapper {
+    @include hashtag;
+    display: flex;
+    gap: 1.2rem;
+    .hashtag {
+      font-size: 16px;
+    }
   }
 }
