@@ -33,7 +33,12 @@
       .title {
         font-size: 30px;
         @include mobile {
-          font-size: 25px;
+          font-size: 22px;
+        }
+        strong {
+          margin-left: 12px;
+          font-weight: 700;
+          color: $main;
         }
       }
       .like-wrapper {
@@ -48,7 +53,7 @@
           color: $main;
         }
         @include mobile {
-          font-size: 30px;
+          font-size: 28px;
         }
         i {
           font-size: 1em;
@@ -85,11 +90,11 @@
       }
     }
     .infos-etcs {
-      margin-top: 2.5rem;
+      margin-top: 20px;
       padding: 0.5rem;
-      padding-bottom: 5rem;
+      padding-bottom: 20px;
       border-bottom: solid $lightgray;
-      margin-bottom: 2.5rem;
+      margin-bottom: 20px;
       span {
         &:first-child {
           margin-right: 1.3rem;
@@ -102,8 +107,40 @@
     @include hashtag;
     display: flex;
     gap: 1.2rem;
-    .hashtag {
-      font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .placeReview-wrapper {
+    width: 100%;
+    height: 400px;
+    background-color: $lightgray;
+    .placeReview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      @include mobile {
+        align-items: center;
+      }
+      padding: 15px 10px;
+      .title {
+        font-size: 18px;
+      }
+      .like-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 40px;
+        color: gray;
+        @include mobile {
+          font-size: 22px;
+        }
+        i {
+          font-size: 1em;
+          margin-bottom: 1rem;
+        }
+        span {
+          font-size: 0.2em;
+        }
+      }
     }
   }
 }

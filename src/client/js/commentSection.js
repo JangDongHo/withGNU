@@ -1,4 +1,4 @@
-const rateBtns = document.querySelectorAll(".rateBtn");
+/*const rateBtns = document.querySelectorAll(".rateBtn");
 const clickArea = document.getElementById("clickArea");
 const textarea = clickArea.querySelector("textarea");
 const commentSubmitBtn = document.getElementById("commentSubmitBtn");
@@ -31,4 +31,4 @@ const handleTextarea = (event) => {
   textarea.addEventListener("keyup", handleSubmitBtn);
 };
 
-addRateBtnEvent();
+addRateBtnEvent();*/

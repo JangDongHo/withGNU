@@ -7,9 +7,12 @@
     height: 10px;
     border-radius: 20px;
     background-color: white;
-    font-size: $sm;
+    font-size: 1rem;
+    @include mobile {
+      font-size: 12px;
+    }
     color: gray;
-    box-shadow: $shadow $gray;
+    border: solid black;
     transition-duration: 0.4s;
     cursor: pointer;
     &:hover {

@@ -11,9 +11,10 @@ block content
     header.placeInfo-header
       div.placeInfo-header__title
         h1.title=place.name
+          strong=place.meta.rating
         div.like-wrapper
-          i.fa-regular.fa-thumbs-up
-          span 좋아요
+          i.fa-regular.fa-bookmark
+          span 스크랩
       div.etcs-wrapper
         i.fa-solid.fa-eye
         span  #{place.meta.views}
@@ -33,6 +34,13 @@ block content
       each hashtag in place.info.hashtags
         span.hashtag=hashtag
     div.placeReview-wrapper
-      div.placeReviews
+      div.placeReview-header
+        h1.title 경대생들의 리뷰 (#{place.comments.length})
+        div.like-wrapper
+          i.fa-regular.fa-thumbs-up
+          span 리뷰쓰기
+    form(method="POST" enctype="multipart/form-data")
+      div(class="dropzone")
+        
 block scripts
   script(src="/static/js/commentSection.js")
