@@ -1,0 +1,26 @@
+@mixin ratingBtn($font-size) {
+  font-size: $font-size;
+  .ratingBtn-wrapper {
+    display: flex;
+    align-items: center;
+    color: lightgray;
+    .ratingBtn {
+      display: none;
+      cursor: pointer;
+      &:checked + label {
+        color: $main;
+      }
+    }
+    label {
+      cursor: pointer;
+    }
+    i {
+      margin-right: 10px;
+      font-size: 2.5em;
+    }
+    span {
+      font-size: 1em;
+      margin-right: 30px;
+    }
+  }
+}
