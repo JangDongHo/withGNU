@@ -1,0 +1,40 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 50%);
+    z-index: 2;
+  }
+  .modal-contents {
+    &__header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+      text-align: center;
+      border-bottom: solid $lightgray;
+      padding-bottom: 20px;
+      margin-bottom: 40px;
+      color: $main;
+      i {
+        position: absolute;
+        left: 20px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      span {
+        font-size: 20px;
+      }
+    }
+  }
+}

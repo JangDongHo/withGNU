@@ -4,8 +4,6 @@ $laptop: 1023px;
 $tablet: 767px;
 $mobile: 639px;
 
-// Mixins
-
 @mixin laptopL {
   @media (max-width: #{$laptopL}) {
     @content;

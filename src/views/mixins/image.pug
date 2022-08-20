@@ -1,0 +1,9 @@
+mixin image(place)
+  div.imageModal.modal.hidden#imageModal
+    div.modal-overlay#imageModalOverlay
+    div.modal-contents
+      div.modal-contents__header
+        i.fa-solid.fa-angle-left#closeImageModalBtn
+        span=place.name
+      div.modal-contents__image
+        img(src="")#image

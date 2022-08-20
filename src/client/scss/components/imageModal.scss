@@ -1,0 +1,26 @@
+.imageModal {
+  align-items: center;
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 80%);
+  }
+  .modal-contents {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__header {
+      color: white;
+      border: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      max-width: 80vh;
+      max-height: 80vh;
+    }
+  }
+}

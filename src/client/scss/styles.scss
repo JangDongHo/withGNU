@@ -6,12 +6,17 @@
 @import "./config/variables.scss";
 @import "./config/mediaquery.scss";
 
+// Mixins
+@import "./mixins/review.scss";
+@import "./mixins/ratingBtn.scss";
+@import "./mixins/tags.scss";
+
 // Components
 @import "./components/header.scss";
-@import "./components/tags.scss";
 @import "./components/placebox.scss";
-@import "./components/ratingBtn.scss";
-@import "./components/review.scss";
+@import "./components/modal.scss";
+@import "./components/reviewModal.scss";
+@import "./components/imageModal.scss";
 
 // Screens
 @import "./screens/info.scss";

@@ -1,8 +1,10 @@
-const modalBtn = document.getElementById("reviewModalBtn");
-const modal = document.querySelector(".reviewModal");
+const modalBtn1 = document.getElementById("reviewModalBtn1");
+const modalBtn2 = document.getElementById("reviewModalBtn2");
+const modal = document.getElementById("reviewModal");
 const textarea = document.querySelector("textarea");
 const closeModalBtn = document.getElementById("closeReviewModalBtn");
 const reviewUploadBtn = document.getElementById("reviewUploadBtn");
+const reviewModalOverlay = document.getElementById("reviewModalOverlay");
 
 const handleSubmitBtn = () => {
   if (textarea.value === "") {
@@ -17,17 +19,21 @@ const handleSubmitBtn = () => {
 };
 
 const closeModal = () => {
+  document.body.style.overflow = "visible";
   modal.classList.add("hidden");
 };
 
 const openModal = () => {
+  document.body.style.overflow = "hidden";
   modal.classList.remove("hidden");
-  closeModalBtn.addEventListener("click", closeModal);
   textarea.addEventListener("keyup", handleSubmitBtn);
+  closeModalBtn.addEventListener("click", closeModal);
+  reviewModalOverlay.addEventListener("click", closeModal);
 };
 
 const addModalBtnEvent = () => {
-  modalBtn.addEventListener("click", openModal);
+  modalBtn1.addEventListener("click", openModal);
+  modalBtn2.addEventListener("click", openModal);
 };
 
 addModalBtnEvent();

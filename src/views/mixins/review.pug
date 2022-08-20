@@ -1,0 +1,40 @@
+mixin review(place)
+  div.reviewModal.modal.hidden#reviewModal
+    div.modal-overlay#reviewModalOverlay
+    div.modal-contents
+      div.modal-contents__header
+        i.fa-solid.fa-angle-left#closeReviewModalBtn
+        span 리뷰 작성
+      form.reviewForm(method="POST" enctype="multipart/form-data")
+        div.ratings-wrapper
+          div.ratingBtn-wrapper
+            input(type="radio", name="commentRating", id="rate1", value="1").ratingBtn
+            label(for="rate1")
+              i.fa-regular.fa-face-frown-open
+              span 비추
+          div.ratingBtn-wrapper
+            input(type="radio", name="commentRating", id="rate2", value="2").ratingBtn
+            label(for="rate2")
+              i.fa-regular.fa-face-frown
+              span 별로
+          div.ratingBtn-wrapper
+            input(type="radio", name="commentRating", id="rate3", value="3").ratingBtn
+            label(for="rate3")
+              i.fa-regular.fa-face-meh
+              span 무난
+          div.ratingBtn-wrapper
+            input(type="radio", name="commentRating", id="rate4", value="4").ratingBtn
+            label(for="rate4")
+              i.fa-regular.fa-face-grin-wide
+              span 좋아
+          div.ratingBtn-wrapper
+            input(type="radio", name="commentRating", id="rate5", value="5" checked).ratingBtn
+            label(for="rate5")
+              i.fa-regular.fa-face-grin-stars
+              span 강추
+        textarea(name="commentReview", placeholder=`${loggedInUser.username}님, ${place.name}에 대한 솔직한 리뷰를 작성해주세요!`, required)
+        div.uploadBtns-wrapper
+          div.upload-wrapper
+            label(for="commentImg") +
+            input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
+          button(disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록

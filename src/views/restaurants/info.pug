@@ -1,48 +1,15 @@
 extends ../base.pug
+include ../mixins/review
+include ../mixins/image
 
+block modal
+  +image(place)
+  if loggedIn
+    +review(place)
 block content
-  div.reviewModal.hidden
-    div.modal-overlay
-    div.modal-contents
-      div.modal-contents__header
-        i.fa-solid.fa-angle-left#closeReviewModalBtn
-        span 리뷰 작성
-      form.reviewForm(method="POST" enctype="multipart/form-data")
-        div.ratings-wrapper
-          div.ratingBtn-wrapper
-            input(type="radio", name="commentRating", id="rate1", value="1").ratingBtn
-            label(for="rate1")
-              i.fa-regular.fa-face-frown-open
-              span 비추
-          div.ratingBtn-wrapper
-            input(type="radio", name="commentRating", id="rate2", value="2").ratingBtn
-            label(for="rate2")
-              i.fa-regular.fa-face-frown
-              span 별로
-          div.ratingBtn-wrapper
-            input(type="radio", name="commentRating", id="rate3", value="3").ratingBtn
-            label(for="rate3")
-              i.fa-regular.fa-face-meh
-              span 무난
-          div.ratingBtn-wrapper
-            input(type="radio", name="commentRating", id="rate4", value="4").ratingBtn
-            label(for="rate4")
-              i.fa-regular.fa-face-grin-wide
-              span 좋아
-          div.ratingBtn-wrapper
-            input(type="radio", name="commentRating", id="rate5", value="5" checked).ratingBtn
-            label(for="rate5")
-              i.fa-regular.fa-face-grin-stars
-              span 강추
-        textarea(name="commentReview", placeholder=`${loggedInUser.username}님, ${place.name}에 대한 솔직한 리뷰를 작성해주세요!`, required)
-        div.uploadBtns-wrapper
-          div.upload-wrapper
-            label(for="commentImg") +
-            input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
-          button(disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록
-  div.placeImg-wrapper
-    each photo in place.photoUrl
-      img.placeImg(src=`/${photo}`)
+  div.placeImg-wrapper#headerImages
+    each photo in place.photoUrl.reverse()
+      img.placeImg#headerImageBtn(src=`/${photo}`)
     else 
       img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
   section.placeInfo-wrapper
@@ -51,7 +18,7 @@ block content
         h1.title=place.name
           strong=place.meta.rating
         div.actionBtns-wrapper
-          div.actionBtn-wrapper#reviewModalBtn
+          div.actionBtn-wrapper#reviewModalBtn1
             i.fa-regular.fa-comment
             span 리뷰쓰기
           div.actionBtn-wrapper
@@ -78,7 +45,7 @@ block content
     div.placeReviewContainer
       div.placeReview-header
         h1.title 경대생들의 리뷰 (#{place.comments.length})
-        div.like-wrapper
+        div.reviewBtn-wrapper#reviewModalBtn2
           i.fa-regular.fa-comment
           span 리뷰쓰기
       div.placeReview-wrapper
@@ -113,10 +80,11 @@ block content
               span=comment.text
             div.placeReview__images
               each image in comment.photoUrl
-                img(src=`/${image}`)
+                img(src=`/${image}`)#commentImageBtn
             p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
                     
 
         
 block scripts
   script(src="/static/js/commentSection.js")
+  script(src="/static/js/imageScale.js")

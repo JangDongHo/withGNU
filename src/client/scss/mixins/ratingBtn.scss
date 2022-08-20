@@ -13,14 +13,24 @@
     }
     label {
       cursor: pointer;
+      @include tablet {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
     i {
       margin-right: 10px;
       font-size: 2.5em;
+      @include tablet {
+        margin-right: 0px;
+      }
     }
     span {
       font-size: 1em;
-      margin-right: 30px;
+      @include tablet {
+        margin-right: 0px;
+      }
     }
   }
 }
