@@ -1,10 +1,10 @@
 extends ../base
-include ../mixins/restaurant
+include ../mixins/place
 
 block content
   div.placeBox-wrapper
     each place in places
-      +restaurant(place)
+      +place(place)
     else
       span No places found
 block scripts
