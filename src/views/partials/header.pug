@@ -6,10 +6,10 @@ header.header-wrapper
       if loggedIn
         li
           a(href=`/users/${loggedInUser._id}`)
-            i.fa-solid.fa-address-card.fa-lg
-        li
-          a(href="/users/logout")
-            i.fa-solid.fa-right-from-bracket
+            if loggedInUser.avatarUrl === ""
+              img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
+            else
+              img(src="")
       else
         li
           a(href="/join")

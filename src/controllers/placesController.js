@@ -14,7 +14,12 @@ export const home = async (req, res) => {
 
 export const search = async (req, res) => {
   const { search } = req.query;
-  const places = await Place.find();
+  const places = await Place.find({
+    $or: [
+      { name: { $regex: new RegExp(search, "i") } },
+      { "info.hashtags": { $regex: new RegExp(search, "i") } },
+    ],
+  });
   return res.render("places/search", {
     pageTitle: "검색",
     places,

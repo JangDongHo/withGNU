@@ -13,6 +13,7 @@ const usersSchema = new mongoose.Schema({
       ref: "Place",
     },
   ],
+  avatarUrl: { type: String, default: "" },
 });
 
 usersSchema.pre("save", async function () {

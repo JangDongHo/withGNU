@@ -1,5 +1,46 @@
 extends ../base
 
 block content
-  main
-    h1=user.username
+  div.profile-wrapper
+    div.profile-img
+      if loggedInUser.avatarUrl === ""
+        img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
+      else
+        img(src="")
+    h1.profile-name=user.username
+    div.profileReview-wrapper
+      each comment in user.comments.reverse()
+        div.placeReview
+          div.placeReview__header
+            div.placeReview__headerInfo-wrapper
+              if comment.place.photoUrl[0]
+                img(src=`/${comment.place.photoUrl[0]}`)
+              else
+                img(src=`https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80`)
+              h1=comment.place.name
+            div.rating-wrapper
+              case comment.rating
+                when 1
+                  i.fa-regular.fa-face-frown-open
+                  span 비추
+                when 2
+                  i.fa-regular.fa-face-frown
+                  span 별로
+                when 3
+                  i.fa-regular.fa-face-meh
+                  span 무난
+                when 4
+                  i.fa-regular.fa-face-grin-wide
+                  span 좋아
+                when 5
+                  i.fa-regular.fa-face-grin-stars
+                  span 강추
+          div.placeReview__content
+            span=comment.text
+          div.placeReview__images
+            each image in comment.photoUrl
+              img(src=`/${image}`)#commentImageBtn
+          p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
+    if String(id) === String(loggedInUser._id)
+      a(href="/users/logout")
+        span 로그아웃
