@@ -113,11 +113,12 @@ export const postLogin = async (req, res) => {
 
 export const profile = async (req, res) => {
   const { id } = req.params;
-  const user = await Users.findById(id).populate({
-    path: "comments",
-    populate: { path: "place" },
-  });
-  console.log(user);
+  const user = await Users.findById(id)
+    .populate("likes")
+    .populate({
+      path: "comments",
+      populate: { path: "place" },
+    });
   return res.render("users/profile", {
     pageTitle: `${user.username}님의 프로필`,
     user,

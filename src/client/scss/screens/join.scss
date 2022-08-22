@@ -1,0 +1,76 @@
+.inputForm-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 10px;
+  i {
+    font-size: 1.5rem;
+    color: gray;
+    margin-bottom: 5px;
+  }
+  .title {
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 700;
+    border-bottom: solid $main 3px;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 5rem;
+  }
+  .inputForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: $lightgray;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    .input {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 5px;
+      margin-bottom: 30px;
+      input {
+        padding: 10px 5px;
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+        border-bottom: solid $gray;
+        &::placeholder {
+          font-size: 16px;
+        }
+      }
+      span {
+        font-weight: 700;
+        font-size: 16px;
+      }
+    }
+    .rows {
+      flex-direction: column;
+    }
+    .submit {
+      width: 230px;
+      height: 40px;
+      background-color: $main;
+      color: $lightgray;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+  .auth-switch {
+    font-size: 16px;
+    a {
+      color: $blue;
+    }
+  }
+}

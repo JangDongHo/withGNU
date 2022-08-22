@@ -19,7 +19,9 @@ export const search = async (req, res) => {
       { name: { $regex: new RegExp(search, "i") } },
       { "info.hashtags": { $regex: new RegExp(search, "i") } },
     ],
-  });
+  })
+    .sort("-meta.rating")
+    .sort("-meta.likes");
   return res.render("places/search", {
     pageTitle: "검색",
     places,
@@ -97,16 +99,21 @@ export const placeScrap = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.session.user;
   const user = await Users.findById(_id);
+  const place = await Place.findById(id);
   let userScraps = user.likes;
   const index = userScraps.indexOf(id);
   if (index !== -1) {
     userScraps.splice(index, 1);
     Users.findByIdAndUpdate(_id, { $set: { likes: userScraps } });
     user.save();
+    place.meta.likes -= 1;
+    place.save();
     return res.status(200).json({ msg: "cancelScrap" });
   } else {
     user.likes.push(id);
     user.save();
+    place.meta.likes += 1;
+    place.save();
     return res.status(200).json({ msg: "addScrap" });
   }
 };

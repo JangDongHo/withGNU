@@ -1,5 +1,9 @@
 extends ../base
+include ../mixins/place 
+include ../mixins/image
 
+block modal
+  +image(user.comments)
 block content
   div.profile-wrapper
     div.profile-img
@@ -8,6 +12,8 @@ block content
       else
         img(src="")
     h1.profile-name=user.username
+
+    h1.profileReview-title #{user.username}님의 리뷰 (#{user.comments.length})
     div.profileReview-wrapper
       each comment in user.comments.reverse()
         div.placeReview
@@ -41,6 +47,12 @@ block content
             each image in comment.photoUrl
               img(src=`/${image}`)#commentImageBtn
           p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
+    h1.profileReview-title #{user.username}님의 스크랩 (#{user.likes.length})
+    div.placeProfileBox-wrapper
+      each place in user.likes
+        +place(place)
     if String(id) === String(loggedInUser._id)
       a(href="/users/logout")
         span 로그아웃
+block scripts 
+  script(src="/static/js/imageScale.js")

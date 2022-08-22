@@ -1,11 +1,12 @@
 extends ../base.pug
+include ../mixins/reviewModal
 include ../mixins/review
 include ../mixins/image
 
 block modal
   +image(place)
   if loggedIn
-    +review(place)
+    +reviewModal(place)
 block content
   div.placeImg-wrapper#headerImages
     each photo in place.photoUrl.reverse()
@@ -29,6 +30,8 @@ block content
         span  #{place.meta.views}
         i.fa-solid.fa-pencil
         span  #{place.comments.length}
+        i.fa-solid.fa-bookmark
+        span  #{place.meta.likes}
     div.map-layer
     div.info-wrapper
       div.infos
@@ -49,39 +52,8 @@ block content
           i.fa-regular.fa-comment
           span 리뷰쓰기
       div.placeReview-wrapper
-        each comment in place.comments.reverse()
-          div.placeReview
-            div.placeReview__header
-              div.placeReview__headerInfo-wrapper
-                img(src="https://img5.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P2.jpg")
-                div.placeReview__headerInfo
-                  h1=comment.owner.username
-                  p
-                    i.fa-solid.fa-pen
-                    small  #{comment.owner.comments.length}
-              div.rating-wrapper
-                case comment.rating
-                  when 1
-                    i.fa-regular.fa-face-frown-open
-                    span 비추
-                  when 2
-                    i.fa-regular.fa-face-frown
-                    span 별로
-                  when 3
-                    i.fa-regular.fa-face-meh
-                    span 무난
-                  when 4
-                    i.fa-regular.fa-face-grin-wide
-                    span 좋아
-                  when 5
-                    i.fa-regular.fa-face-grin-stars
-                    span 강추
-            div.placeReview__content
-              span=comment.text
-            div.placeReview__images
-              each image in comment.photoUrl
-                img(src=`/${image}`)#commentImageBtn
-            p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
+        +review(place)
+        
                     
 
         

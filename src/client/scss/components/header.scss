@@ -21,8 +21,20 @@
     margin-right: 20px;
     li {
       margin-left: 10px;
-      font-size: 17px;
+      font-size: 14px;
       margin: 10px;
+      font-weight: 700;
+      .joinBtn {
+        background-color: white;
+        color: $main;
+        padding: 10px 25px;
+        border-radius: 7px;
+      }
+      @include mobile {
+        .loginBtn {
+          display: none;
+        }
+      }
       img {
         width: 40px;
         height: 40px;

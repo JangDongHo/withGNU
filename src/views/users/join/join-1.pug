@@ -1,8 +1,15 @@
 extends ../../base
 
 block content
-  main
-    h1 경상국립대학교 학생 웹메일 인증
-    form(method="POST")
-      input(placeholder="ID" name="id" type="text", required)
-      button 전송
+  div.inputForm-wrapper
+    i.fa-solid.fa-1
+    h1.title 학생 인증
+    span.subtitle 경상국립대학교 웹메일로 인증합니다.
+    form(method="POST").inputForm
+      div.email
+        input(placeholder="아이디" name="id" type="text", required)
+        span @gnu.ac.kr
+      button.submit 전송
+    div.auth-switch
+      span 이미 계정이 있으신가요? 
+      a(href="/login") 로그인 &rarr;
