@@ -5,10 +5,10 @@ const commentSchema = new mongoose.Schema({
   photoUrl: { type: Array },
   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Users" },
   rating: { type: Number, default: "0" },
-  restaurant: {
+  place: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Restaurant",
+    ref: "Place",
   },
   createdAt: { type: Date, required: true, default: Date.now },
 });

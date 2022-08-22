@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const restaurantSchema = new mongoose.Schema({
+const placeSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   naver_map_url: { type: String, default: "" },
   info: {
@@ -20,11 +20,11 @@ const restaurantSchema = new mongoose.Schema({
   photoUrl: [{ type: String }],
 });
 
-restaurantSchema.static("formatHashtags", function (hashtags) {
+placeSchema.static("formatHashtags", function (hashtags) {
   return hashtags
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
-const Restaurant = mongoose.model("Restaurant", restaurantSchema);
-export default Restaurant;
+const Place = mongoose.model("Place", placeSchema);
+export default Place;

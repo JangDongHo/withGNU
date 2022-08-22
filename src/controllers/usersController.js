@@ -124,3 +124,10 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
+
+export const checkLogin = (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.status(200).json({ msg: "Unauthorized" });
+  }
+  return res.status(200).json({ msg: "Authorized" });
+};

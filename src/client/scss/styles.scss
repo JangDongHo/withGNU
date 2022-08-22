@@ -66,3 +66,39 @@ main {
 .hidden {
   display: none;
 }
+
+.clicked {
+  color: $main !important;
+}
+
+.message {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  margin: 0 auto;
+  max-width: 200px;
+  padding: 18px 40px;
+  border-radius: 10000px;
+  text-align: center;
+  animation: goAway 0.5s ease-in-out forwards;
+  animation-delay: 3s;
+  z-index: 10;
+  @keyframes goAway {
+    from {
+      transform: none;
+      opacity: 1;
+    }
+    to {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+  }
+  &.info {
+    background-color: lightseagreen;
+    color: white;
+  }
+  &.error {
+    background-color: tomato;
+    color: white;
+  }
+}

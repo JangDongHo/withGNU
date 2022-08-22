@@ -12,7 +12,7 @@ block content
       img.placeImg#headerImageBtn(src=`/${photo}`)
     else 
       img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
-  section.placeInfo-wrapper
+  section.placeInfo-wrapper#placeInfoContainer
     header.placeInfo-header
       div.placeInfo-header__title
         h1.title=place.name
@@ -21,8 +21,8 @@ block content
           div.actionBtn-wrapper#reviewModalBtn1
             i.fa-regular.fa-comment
             span 리뷰쓰기
-          div.actionBtn-wrapper
-            i.fa-regular.fa-bookmark
+          div(class=scrapClicked ? "clicked" : "", data-placeId=place._id).actionBtn-wrapper#scrapBtn
+            i(class=scrapClicked ? "fa-solid" : "fa-regular").fa-bookmark#scrapIcon
             span 스크랩
       div.etcs-wrapper
         i.fa-solid.fa-eye
@@ -88,3 +88,4 @@ block content
 block scripts
   script(src="/static/js/commentSection.js")
   script(src="/static/js/imageScale.js")
+  script(src="/static/js/placeScrap.js")

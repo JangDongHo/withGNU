@@ -1,5 +1,5 @@
 mixin place(place)
-  a(href=`/restaurants/${place._id}`)
+  a(href=`/places/${place._id}`)
     div.placeBox
       if place.photoUrl.length !== 0
         img(src=`${place.photoUrl[0]}`)

@@ -7,6 +7,24 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 
+export const protectorMiddleware = (req, res, next) => {
+  if (req.session.loggedIn) {
+    return next();
+  } else {
+    req.flash("error", "Log in first");
+    return res.redirect("/");
+  }
+};
+
+export const publicOnlyMiddleware = (req, res, next) => {
+  if (!req.session.loggedIn) {
+    return next();
+  } else {
+    req.flash("error", "Not authorized");
+    return res.redirect("/");
+  }
+};
+
 export const placeImgUpload = multer({
   dest: "uploads/placeImg/",
   limits: {

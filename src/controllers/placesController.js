@@ -1,9 +1,9 @@
-import Restaurant from "../models/Restaurant";
+import Place from "../models/Place";
 import Users from "../models/Users";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
-  const places = await Restaurant.find({});
+  const places = await Place.find({});
   const tmp = [];
   places.forEach((place) => {
     tmp.push(...place.info.hashtags);
@@ -14,8 +14,8 @@ export const home = async (req, res) => {
 
 export const search = async (req, res) => {
   const { search } = req.query;
-  const places = await Restaurant.find();
-  return res.render("restaurants/search", {
+  const places = await Place.find();
+  return res.render("places/search", {
     pageTitle: "검색",
     places,
   });
@@ -23,15 +23,23 @@ export const search = async (req, res) => {
 
 export const info = async (req, res) => {
   const { id } = req.params;
-  const place = await Restaurant.findById(id).populate({
+  const place = await Place.findById(id).populate({
     path: "comments",
     populate: { path: "owner" },
   });
+  let scrapClicked = false;
+  if (req.session.loggedIn) {
+    const userId = req.session.user._id;
+    const user = await Users.findById(userId);
+    const likes = user.likes;
+    scrapClicked = likes.includes(id);
+  }
   place.meta.views += 1;
   await place.save();
-  return res.render("restaurants/info", {
+  return res.render("places/info", {
     pageTitle: place.name,
     place,
+    scrapClicked,
   });
 };
 
@@ -55,27 +63,45 @@ export const createComment = async (req, res) => {
       text: commentReview,
       owner: _id,
       rating: commentRating,
-      restaurant: id,
+      place: id,
       photoUrl: filePaths,
     });
     const user = await Users.findById(_id);
     user.comments.push(newComment._id);
     user.save();
-    const restaurant = await Restaurant.findById(id);
-    restaurant.comments.push(newComment._id);
+    const place = await Place.findById(id);
+    place.comments.push(newComment._id);
     filePaths.forEach((filePath) => {
-      restaurant.photoUrl.push(filePath);
+      place.photoUrl.push(filePath);
     });
     // 식당 평점 계산
-    restaurant.meta.rating = (
-      (restaurant.meta.rating + Number(commentRating)) /
-      restaurant.comments.length
+    place.meta.rating = (
+      (place.meta.rating + Number(commentRating)) /
+      place.comments.length
     ).toFixed(1);
-    restaurant.save();
-    return res.redirect(`/restaurants/${id}`);
+    place.save();
+    return res.redirect(`/places/${id}`);
   } catch (error) {
     console.log(error);
     req.flash("error", error);
     return res.redirect("/");
+  }
+};
+
+export const placeScrap = async (req, res) => {
+  const { id } = req.params;
+  const { _id } = req.session.user;
+  const user = await Users.findById(_id);
+  let userScraps = user.likes;
+  const index = userScraps.indexOf(id);
+  if (index !== -1) {
+    userScraps.splice(index, 1);
+    Users.findByIdAndUpdate(_id, { $set: { likes: userScraps } });
+    user.save();
+    return res.status(200).json({ msg: "cancelScrap" });
+  } else {
+    user.likes.push(id);
+    user.save();
+    return res.status(200).json({ msg: "addScrap" });
   }
 };

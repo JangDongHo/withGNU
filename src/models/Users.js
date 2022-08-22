@@ -10,7 +10,7 @@ const usersSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Restaurant",
+      ref: "Place",
     },
   ],
 });

@@ -4,7 +4,7 @@ import session from "express-session";
 import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
-import restaurantsRouter from "./routers/restaurantsRouter";
+import placesRouter from "./routers/placesRouter";
 import userRouter from "./routers/userRouter";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
@@ -30,7 +30,7 @@ app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
-app.use("/restaurants", restaurantsRouter);
+app.use("/places", placesRouter);
 app.use("/users", userRouter);
 app.use("/api", apiRouter);
 

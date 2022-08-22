@@ -9,6 +9,8 @@ module.exports = {
     main: BASE_JS + "main.js",
     commentSection: BASE_JS + "commentSection.js",
     imageScale: BASE_JS + "imageScale.js",
+    placeScrap: BASE_JS + "placeScrap.js",
+    middleware: BASE_JS + "middleware.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

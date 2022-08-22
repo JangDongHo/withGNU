@@ -1,8 +1,11 @@
 import express from "express";
-import { createComment } from "../controllers/restaurantsController";
+import { placeScrap } from "../controllers/placesController";
+import { checkLogin } from "../controllers/usersController";
+import { protectorMiddleware } from "../middlewares";
 
 const apiRouter = express.Router();
 
-apiRouter.post("/restaurants/:id([0-9a-f]{24})/comment", createComment);
+apiRouter.post("/checkLogin", checkLogin);
+apiRouter.post("/places/:id([0-9a-f]{24})/scrap", placeScrap);
 
 export default apiRouter;
