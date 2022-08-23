@@ -7,11 +7,15 @@ block modal
 block content
   div.profile-wrapper
     div.profile-img
-      if loggedInUser.avatarUrl === ""
+      if user.avatarUrl === ""
         img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
       else
-        img(src="")
+        img(src=user.avatarUrl)
     h1.profile-name=user.username
+    if String(id) === String(loggedInUser._id)
+      div.profile-action
+        a(href="/users/edit-profile").btn.edit 개인정보 수정
+        a(href="/users/logout").btn.logout 로그아웃
 
     h1.profileReview-title #{user.username}님의 리뷰 (#{user.comments.length})
     div.profileReview-wrapper
@@ -51,8 +55,5 @@ block content
     div.placeProfileBox-wrapper
       each place in user.likes
         +place(place)
-    if String(id) === String(loggedInUser._id)
-      a(href="/users/logout")
-        span 로그아웃
 block scripts 
   script(src="/static/js/imageScale.js")

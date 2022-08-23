@@ -17,6 +17,7 @@
 @import "./components/modal.scss";
 @import "./components/reviewModal.scss";
 @import "./components/imageModal.scss";
+@import "./components/inputForm.scss";
 
 // Screens
 @import "./screens/info.scss";
@@ -24,6 +25,7 @@
 @import "./screens/search.scss";
 @import "./screens/profile.scss";
 @import "./screens/join.scss";
+@import "./screens/edit-profile.scss";
 
 a {
   color: inherit;

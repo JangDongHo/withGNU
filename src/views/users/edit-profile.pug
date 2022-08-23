@@ -1,0 +1,24 @@
+extends ../base
+
+block content
+  div.inputForm-wrapper
+    i.fa-solid.fa-pen
+    h1.title 프로필 수정
+    span.subtitle 프로필을 수정합니다.
+    form(method="POST" enctype="multipart/form-data").inputForm
+      div.input.rows
+        div.avatarUpload-wrapper
+          div.avatarUpload
+            label(for="commentImg")
+              if user.avatarUrl === ""
+                img#previewImage(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
+              else
+                img#previewImage(src=user.avatarUrl)
+            input(type="file" id="commentImg", name="commentImg" accept="image/*")
+        div.nickname-wrapper
+          label(for="username") 닉네임
+          input(placeholder="닉네임" name="username" id="username" type="text", value=`${user.username}` required)
+      button.submit 확인
+
+block scripts 
+  script(src="/static/js/changeAvartar.js")

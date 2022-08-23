@@ -11,6 +11,7 @@ module.exports = {
     imageScale: BASE_JS + "imageScale.js",
     placeScrap: BASE_JS + "placeScrap.js",
     middleware: BASE_JS + "middleware.js",
+    changeAvartar: BASE_JS + "changeAvartar.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

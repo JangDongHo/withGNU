@@ -9,21 +9,24 @@ const generateRandom = (min, max) => {
 
 export const emailAuth = async (req, res) => {
   const pageTitle = "회원가입";
-  const { id, number, username, password } = req.body;
+  const { id, number, password, password2, username } = req.body;
   // 3단계
-  if (username && password) {
+  if (password && password2 && username) {
     const userExists = await Users.exists({ username });
+    if (password !== password2) {
+      req.flash("error", "비밀번호가 일치하지 않습니다.");
+      return res.status(400).render("users/join/join-3", { pageTitle });
+    }
     if (userExists) {
       req.flash("error", "같은 닉네임이 존재합니다.");
       return res.status(400).render("users/join/join-3", { pageTitle });
     }
-    // 같은 닉네임이 존재하는 경우
-    const email = req.session.email;
     // 악용 방지
+    const email = req.session.email;
     const emailExists = await Users.exists({ email });
     if (emailExists) {
       req.flash("error", "이미 인증된 계정이 존재합니다.");
-      return res.redirect("/login");
+      return res.status(400).render("/login", { pageTitle });
     }
     // 유저 정보 DB 저장
     try {
@@ -136,4 +139,10 @@ export const checkLogin = (req, res) => {
     return res.status(200).json({ msg: "Unauthorized" });
   }
   return res.status(200).json({ msg: "Authorized" });
+};
+
+export const editProfile = async (req, res) => {
+  const { _id } = req.session.user;
+  const user = await Users.findById(_id);
+  return res.render("users/edit-profile", { pageTitle: "프로필 수정", user });
 };

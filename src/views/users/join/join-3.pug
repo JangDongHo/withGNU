@@ -3,13 +3,11 @@ extends ../../base
 block content
   div.inputForm-wrapper
     i.fa-solid.fa-3
-    h1.title 개인정보 입력
-    span.subtitle 야호! 거의 다 왔습니다.
+    h1.title 개인정보 설정
+    span.subtitle 마지막 단계입니다.
     form(method="POST").inputForm
       div.input.rows
-        input(placeholder="유저네임" name="username" type="text", required)
-        input(placeholder="패스워드" name="password" type="text", required)
+        input(placeholder="비밀번호" name="password" type="text", required)
+        input(placeholder="비밀번호 확인" name="password2" type="text", required)
+        input(placeholder="닉네임" name="username" type="text", required)
       button.submit 확인
-    div.auth-switch
-      span 이미 계정이 있으신가요? 
-      a(href="/login") 로그인 &rarr;

@@ -6,7 +6,7 @@ import {
   getLogin,
   postLogin,
 } from "../controllers/usersController";
-import { publicOnlyMiddleware } from "../middlewares";
+import { publicOnlyMiddleware, avartarImgUpload } from "../middlewares";
 
 const rootRouter = express.Router();
 
