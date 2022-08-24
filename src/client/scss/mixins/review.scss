@@ -21,6 +21,7 @@
           margin-right: 5px;
         }
         .placeReview__headerInfo {
+          margin-right: 10px;
           h1 {
             font-size: 16px;
             margin-bottom: 6px;
@@ -72,6 +73,29 @@
       padding: 10px;
       color: gray;
       font-size: 9px;
+    }
+  }
+  .placeReview__action {
+    position: absolute;
+    font-size: 13px;
+    bottom: 0;
+    padding: 10px;
+    .edit,
+    .delete {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 25px;
+      margin-right: 5px;
+      color: white;
+      border-radius: 20px;
+    }
+    .edit {
+      background-color: rgb(0, 125, 125);
+    }
+    .delete {
+      background-color: rgb(255, 121, 97);
     }
   }
 }

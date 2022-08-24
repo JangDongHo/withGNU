@@ -89,7 +89,6 @@ export const createComment = async (req, res) => {
     place.save();
     return res.redirect(`/places/${id}`);
   } catch (error) {
-    console.log(error);
     req.flash("error", error);
     return res.redirect("/");
   }
@@ -116,4 +115,31 @@ export const placeScrap = async (req, res) => {
     place.save();
     return res.status(200).json({ msg: "addScrap" });
   }
+};
+
+export const editComment = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { commentReview, commentRating },
+    params: { id },
+    //files: { commentImg },
+  } = req;
+  console.log(_id, commentReview, commentRating, id);
+  return res.redirect("/search");
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    session: { user },
+    params: { id },
+  } = req;
+  const comment = await Comment.findById(id);
+  if (String(comment.owner) !== String(user._id)) {
+    req.flash("error", "권한이 없습니다.");
+    return res.status(403).redirect("/");
+  }
+  await Comment.findByIdAndDelete(id);
+  return res.sendStatus(200);
 };

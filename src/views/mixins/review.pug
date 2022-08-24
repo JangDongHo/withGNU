@@ -1,6 +1,6 @@
 mixin review(place)
   each comment in place.comments.reverse()
-    div.placeReview
+    div(data-reviewId=comment.id).placeReview
       a(href=`/users/${comment.owner.id}`)
         div.placeReview__header
           div.placeReview__headerInfo-wrapper
@@ -33,3 +33,7 @@ mixin review(place)
         each image in comment.photoUrl
           img(src=`/${image}`)#commentImageBtn
       p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
+      if String(comment.owner.id) === String(loggedInUser._id)
+        div.placeReview__action
+          span.edit#reviewEditBtn 수정
+          span.delete#reviewDeleteBtn 삭제
