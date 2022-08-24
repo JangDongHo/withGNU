@@ -141,8 +141,56 @@ export const checkLogin = (req, res) => {
   return res.status(200).json({ msg: "Authorized" });
 };
 
-export const editProfile = async (req, res) => {
-  const { _id } = req.session.user;
-  const user = await Users.findById(_id);
+export const getEditProfile = (req, res) => {
+  const user = req.session.user;
   return res.render("users/edit-profile", { pageTitle: "프로필 수정", user });
+};
+
+export const postEditProfile = async (req, res) => {
+  const { avatarUrl, _id } = req.session.user;
+  const { username } = req.body;
+  let path = avatarUrl;
+  try {
+    path = req.file.path;
+  } catch (error) {
+    path = avatarUrl;
+  }
+  const updatedUser = await Users.findByIdAndUpdate(
+    _id,
+    {
+      username,
+      avatarUrl: path,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect(`/users/${_id}`);
+};
+
+export const getEditPassword = (req, res) => {
+  const user = req.session.user;
+  return res.render("users/edit-password", {
+    pageTitle: "비밀번호 변경",
+    user,
+  });
+};
+
+export const postEditPassword = async (req, res) => {
+  const { _id } = req.session.user;
+  const { password1, password2, password3 } = req.body;
+  const user = await Users.findById(_id);
+  const checkOldpassword = await bcrypt.compare(password1, user.password);
+  const pageTitle = "비밀번호 변경";
+  if (!checkOldpassword) {
+    req.flash("error", "현재 비밀번호를 다시 확인해주세요.");
+    return res.status(400).render("users/edit-password", { pageTitle });
+  }
+  if (password2 !== password3) {
+    req.flash("error", "새로운 비밀번호 확인을 다시 확인해주세요.");
+    return res.status(400).render("users/edit-password", { pageTitle });
+  }
+  user.password = password2;
+  user.save();
+  req.flash("info", "비밀번호가 변경되었습니다.");
+  return res.redirect(`/users/${_id}`);
 };

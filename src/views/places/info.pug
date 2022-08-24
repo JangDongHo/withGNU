@@ -44,7 +44,8 @@ block content
         span=place.info.time
     div.hashtags-wrapper
       each hashtag in place.info.hashtags
-        span.hashtag=hashtag
+        a(href=`/search/${hashtag}`)
+          span.hashtag=hashtag
     div.placeReviewContainer
       div.placeReview-header
         h1.title 경대생들의 리뷰 (#{place.comments.length})

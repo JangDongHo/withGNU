@@ -1,4 +1,4 @@
-const changeAvatarBtn = document.getElementById("commentImg");
+const changeAvatarBtn = document.getElementById("avartarImage");
 
 const changeAvartar = (event) => {
   const image = event.target;

@@ -36,7 +36,7 @@ export const placeImgUpload = multer({
 export const avartarImgUpload = multer({
   dest: "uploads/avartarImg/",
   limits: {
-    fileSize: 10000000000,
+    fileSize: 3000000,
   },
   storage: undefined,
 });

@@ -7,14 +7,18 @@ block modal
 block content
   div.profile-wrapper
     div.profile-img
-      if user.avatarUrl === ""
-        img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
-      else
-        img(src=user.avatarUrl)
-    h1.profile-name=user.username
+      a(href="/users/edit-profile")
+        if user.avatarUrl === ""
+          img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
+        else
+          img(src=`/${user.avatarUrl}`)
+    a(href="/users/edit-profile")
+      h1.profile-name=user.username
+        if String(id) === String(loggedInUser._id)
+          i.fa-solid.fa-pen
     if String(id) === String(loggedInUser._id)
       div.profile-action
-        a(href="/users/edit-profile").btn.edit 개인정보 수정
+        a(href="/users/edit-password").btn.edit 비밀번호 수정
         a(href="/users/logout").btn.logout 로그아웃
 
     h1.profileReview-title #{user.username}님의 리뷰 (#{user.comments.length})
@@ -53,7 +57,7 @@ block content
           p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
     h1.profileReview-title #{user.username}님의 스크랩 (#{user.likes.length})
     div.placeProfileBox-wrapper
-      each place in user.likes
+      each place in user.likes.reverse()
         +place(place)
 block scripts 
   script(src="/static/js/imageScale.js")

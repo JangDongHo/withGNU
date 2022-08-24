@@ -9,12 +9,12 @@ block content
       div.input.rows
         div.avatarUpload-wrapper
           div.avatarUpload
-            label(for="commentImg")
+            label(for="avartarImage")
               if user.avatarUrl === ""
                 img#previewImage(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
               else
-                img#previewImage(src=user.avatarUrl)
-            input(type="file" id="commentImg", name="commentImg" accept="image/*")
+                img#previewImage(src=`/${user.avatarUrl}`)
+            input(type="file" id="avartarImage", name="avartarImage" accept="image/*")
         div.nickname-wrapper
           label(for="username") 닉네임
           input(placeholder="닉네임" name="username" id="username" type="text", value=`${user.username}` required)

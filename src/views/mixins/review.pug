@@ -1,31 +1,32 @@
 mixin review(place)
   each comment in place.comments.reverse()
     div.placeReview
-      div.placeReview__header
-        div.placeReview__headerInfo-wrapper
-          img(src="https://img5.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P2.jpg")
-          div.placeReview__headerInfo
-            h1=comment.owner.username
-            p
-              i.fa-solid.fa-pen
-              small  #{comment.owner.comments.length}
-        div.rating-wrapper
-          case comment.rating
-            when 1
-              i.fa-regular.fa-face-frown-open
-              span 비추
-            when 2
-              i.fa-regular.fa-face-frown
-              span 별로
-            when 3
-              i.fa-regular.fa-face-meh
-              span 무난
-            when 4
-              i.fa-regular.fa-face-grin-wide
-              span 좋아
-            when 5
-              i.fa-regular.fa-face-grin-stars
-              span 강추
+      a(href=`/users/${comment.owner.id}`)
+        div.placeReview__header
+          div.placeReview__headerInfo-wrapper
+            img(src="https://img5.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P2.jpg")
+            div.placeReview__headerInfo
+              h1=comment.owner.username
+              p
+                i.fa-solid.fa-pen
+                small  #{comment.owner.comments.length}
+          div.rating-wrapper
+            case comment.rating
+              when 1
+                i.fa-regular.fa-face-frown-open
+                span 비추
+              when 2
+                i.fa-regular.fa-face-frown
+                span 별로
+              when 3
+                i.fa-regular.fa-face-meh
+                span 무난
+              when 4
+                i.fa-regular.fa-face-grin-wide
+                span 좋아
+              when 5
+                i.fa-regular.fa-face-grin-stars
+                span 강추
       div.placeReview__content
         span=comment.text
       div.placeReview__images

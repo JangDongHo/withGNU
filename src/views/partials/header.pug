@@ -9,7 +9,7 @@ header.header-wrapper
             if loggedInUser.avatarUrl === ""
               img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
             else
-              img(src="")
+              img(src=`/${loggedInUser.avatarUrl}`)
       else
         li
           a(href="/login").loginBtn 로그인
