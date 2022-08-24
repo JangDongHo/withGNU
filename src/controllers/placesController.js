@@ -122,12 +122,16 @@ export const editComment = async (req, res) => {
     session: {
       user: { _id },
     },
-    body: { commentReview, commentRating },
+    body: { reviewText, reviewRating },
     params: { id },
     //files: { commentImg },
   } = req;
-  console.log(_id, commentReview, commentRating, id);
-  return res.redirect("/search");
+  const test = await Comment.findById(id);
+  const comment = await Comment.findByIdAndUpdate(id, {
+    text: reviewText,
+    rating: Number(reviewRating),
+  });
+  return res.status(200).redirect("/");
 };
 
 export const deleteComment = async (req, res) => {

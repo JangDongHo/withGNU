@@ -55,12 +55,15 @@ const addEditBtnEvent = () => {
 
 const handleEditBtn = (event) => {
   const editComment = async () => {
+    const reviewRating = modal.querySelector(
+      'input[name="commentRating"]:checked'
+    ).value;
     await fetch(`/api/comments/${commentId}/edit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ reviewText, reviewRating }),
     });
   };
   const review = event.path[2];
@@ -71,6 +74,7 @@ const handleEditBtn = (event) => {
   textarea.value = reviewText;
   document.body.style.overflow = "hidden";
   modal.classList.remove("hidden");
+  reviewUploadBtn.setAttribute("type", "button");
   reviewUploadBtn.addEventListener("click", editComment);
   textarea.addEventListener("keyup", handleSubmitBtn);
   closeModalBtn.addEventListener("click", closeModal);
