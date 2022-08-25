@@ -10,6 +10,7 @@ const reviewModalOverlay = document.getElementById("reviewModalOverlay");
 
 const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
+const scrapBtn = document.getElementById("scrapBtn");
 
 const handleSubmitBtn = () => {
   if (textarea.value === "") {
@@ -58,26 +59,37 @@ const handleEditBtn = (event) => {
     const reviewRating = modal.querySelector(
       'input[name="commentRating"]:checked'
     ).value;
-    await fetch(`/api/comments/${commentId}/edit`, {
+    const reviewText = document.getElementById("inputBox").value;
+    await fetch(`/api/comments/${reviewId}/edit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ reviewText, reviewRating }),
     });
+    const placeId = scrapBtn.dataset.placeid;
+    window.location = `/places/${placeId}`;
+  };
+  const closeEditModal = () => {
+    reviewUploadBtn.setAttribute("type", "submit");
+    textarea.value = "";
+    reviewUploadBtn.removeEventListener("click", editComment);
+    uploadImageBtn.classList.remove("hidden");
+    document.body.style.overflow = "visible";
+    modal.classList.add("hidden");
   };
   const review = event.path[2];
-  const reviewText = review.querySelector(
-    ".placeReview__content > span"
-  ).innerText;
-  const commentId = review.dataset.reviewid;
-  textarea.value = reviewText;
+  const text = review.querySelector(".placeReview__content > span").innerText;
+  const reviewId = review.dataset.reviewid;
+  const uploadImageBtn = modal.querySelector(".upload-wrapper");
+  textarea.value = text;
   document.body.style.overflow = "hidden";
   modal.classList.remove("hidden");
+  uploadImageBtn.classList.add("hidden");
   reviewUploadBtn.setAttribute("type", "button");
   reviewUploadBtn.addEventListener("click", editComment);
   textarea.addEventListener("keyup", handleSubmitBtn);
-  closeModalBtn.addEventListener("click", closeModal);
+  closeModalBtn.addEventListener("click", closeEditModal);
   reviewModalOverlay.addEventListener("click", closeModal);
 };
 

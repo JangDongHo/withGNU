@@ -127,11 +127,21 @@ export const editComment = async (req, res) => {
     //files: { commentImg },
   } = req;
   const test = await Comment.findById(id);
-  const comment = await Comment.findByIdAndUpdate(id, {
-    text: reviewText,
-    rating: Number(reviewRating),
-  });
-  return res.status(200).redirect("/");
+  try {
+    console.log(reviewText, reviewRating);
+    const comment = await Comment.findByIdAndUpdate(
+      id,
+      {
+        text: reviewText,
+        rating: Number(reviewRating),
+      },
+      { new: true }
+    );
+    console.log(comment);
+  } catch (error) {
+    console.log(error);
+  }
+  return res.status(200).json();
 };
 
 export const deleteComment = async (req, res) => {
@@ -144,6 +154,10 @@ export const deleteComment = async (req, res) => {
     req.flash("error", "권한이 없습니다.");
     return res.status(403).redirect("/");
   }
+  const placeId = comment.place;
+  const place = await Place.findById(placeId);
+  console.log(id);
+  console.log(String(place.comments));
   await Comment.findByIdAndDelete(id);
   return res.sendStatus(200);
 };

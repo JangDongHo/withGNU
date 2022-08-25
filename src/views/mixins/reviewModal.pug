@@ -32,7 +32,7 @@ mixin reviewModal(place)
             label(for="rate5")
               i.fa-regular.fa-face-grin-stars
               span 강추
-        textarea(name="commentReview", placeholder=`${loggedInUser.username}님, ${place.name}에 대한 솔직한 리뷰를 작성해주세요!`, required)
+        textarea#inputBox(name="commentReview", placeholder=`${loggedInUser.username}님, ${place.name}에 대한 솔직한 리뷰를 작성해주세요!`, required)
         div.uploadBtns-wrapper
           div.upload-wrapper
             label(for="commentImg") +
