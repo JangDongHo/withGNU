@@ -10,7 +10,7 @@ mixin review(place)
               p
                 i.fa-solid.fa-pen
                 small  #{comment.owner.comments.length}
-          div.rating-wrapper
+          div.rating-wrapper(data-rating=comment.rating)
             case comment.rating
               when 1
                 i.fa-regular.fa-face-frown-open

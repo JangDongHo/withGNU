@@ -11,8 +11,6 @@ block content
   div.placeImg-wrapper#headerImages
     each photo in place.photoUrl.reverse()
       img.placeImg#headerImageBtn(src=`/${photo}`)
-    else 
-      img.placeImg(src=`https://mp-seoul-image-production-s3.mangoplate.com/17121/ujjnkgye2_uyn_.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80`)
   section.placeInfo-wrapper#placeInfoContainer
     header.placeInfo-header
       div.placeInfo-header__title

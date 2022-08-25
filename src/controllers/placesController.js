@@ -83,8 +83,9 @@ export const createComment = async (req, res) => {
     });
     // 식당 평점 계산
     place.meta.rating = (
-      (place.meta.rating + Number(commentRating)) /
-      place.comments.length
+      (place.meta.rating * (Number(place.comments.length) - 1) +
+        Number(commentRating)) /
+      Number(place.comments.length)
     ).toFixed(1);
     place.save();
     return res.redirect(`/places/${id}`);
@@ -119,25 +120,22 @@ export const placeScrap = async (req, res) => {
 
 export const editComment = async (req, res) => {
   const {
-    session: {
-      user: { _id },
-    },
-    body: { reviewText, reviewRating },
+    body: { reviewText, oldReviewRating, newReviewRating },
     params: { id },
-    //files: { commentImg },
   } = req;
-  const test = await Comment.findById(id);
   try {
-    console.log(reviewText, reviewRating);
-    const comment = await Comment.findByIdAndUpdate(
-      id,
-      {
-        text: reviewText,
-        rating: Number(reviewRating),
-      },
-      { new: true }
-    );
-    console.log(comment);
+    const comment = await Comment.findById(id).populate("place");
+    comment.text = reviewText;
+    comment.rating = Number(newReviewRating);
+    comment.save();
+    const person = Number(comment.place.comments.length);
+    comment.place.meta.rating = (
+      (comment.place.meta.rating * person -
+        Number(oldReviewRating) +
+        Number(newReviewRating)) /
+      person
+    ).toFixed(1);
+    comment.place.save();
   } catch (error) {
     console.log(error);
   }
@@ -148,16 +146,31 @@ export const deleteComment = async (req, res) => {
   const {
     session: { user },
     params: { id },
+    body: { reviewRating, imagePaths },
   } = req;
-  const comment = await Comment.findById(id);
+  const comment = await Comment.findById(id).populate("place");
   if (String(comment.owner) !== String(user._id)) {
     req.flash("error", "권한이 없습니다.");
     return res.status(403).redirect("/");
   }
-  const placeId = comment.place;
-  const place = await Place.findById(placeId);
-  console.log(id);
-  console.log(String(place.comments));
+  const placeId = comment.place.id;
+  const person = Number(comment.place.comments.length);
+  let rating = 0;
+  if (person !== 1) {
+    rating =
+      (Number(comment.place.meta.rating) * person - Number(reviewRating)) /
+      (person - 1);
+  }
+  console.log(rating);
+  await Place.findByIdAndUpdate(
+    placeId,
+    {
+      $pull: { comments: id.toString("hex") },
+      meta: { rating },
+      $pullAll: { photoUrl: imagePaths },
+    },
+    { new: true }
+  );
   await Comment.findByIdAndDelete(id);
   return res.sendStatus(200);
 };

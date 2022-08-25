@@ -56,7 +56,7 @@ const addEditBtnEvent = () => {
 
 const handleEditBtn = (event) => {
   const editComment = async () => {
-    const reviewRating = modal.querySelector(
+    const newReviewRating = modal.querySelector(
       'input[name="commentRating"]:checked'
     ).value;
     const reviewText = document.getElementById("inputBox").value;
@@ -65,7 +65,7 @@ const handleEditBtn = (event) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ reviewText, reviewRating }),
+      body: JSON.stringify({ reviewText, oldReviewRating, newReviewRating }),
     });
     const placeId = scrapBtn.dataset.placeid;
     window.location = `/places/${placeId}`;
@@ -81,6 +81,8 @@ const handleEditBtn = (event) => {
   const review = event.path[2];
   const text = review.querySelector(".placeReview__content > span").innerText;
   const reviewId = review.dataset.reviewid;
+  const oldReviewRating =
+    review.querySelector(".rating-wrapper").dataset.rating;
   const uploadImageBtn = modal.querySelector(".upload-wrapper");
   textarea.value = text;
   document.body.style.overflow = "hidden";
@@ -96,9 +98,21 @@ const handleEditBtn = (event) => {
 const handleDeleteBtn = async (event) => {
   const review = event.path[2];
   const reviewID = review.dataset.reviewid;
+  const reviewRating = review.querySelector(".rating-wrapper").dataset.rating;
+  let imagePaths = [];
+  try {
+    const images = review.querySelectorAll(".placeReview__images > img");
+    images.forEach((image) => {
+      imagePaths.push(image.getAttribute("src").substr(1));
+    });
+  } catch (error) {}
   review.remove();
   await fetch(`/api/comments/${reviewID}/edit`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ reviewRating, imagePaths }),
   });
 };
 
