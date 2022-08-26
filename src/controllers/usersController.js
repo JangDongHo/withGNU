@@ -147,19 +147,21 @@ export const getEditProfile = (req, res) => {
 };
 
 export const postEditProfile = async (req, res) => {
-  const { avatarUrl, _id } = req.session.user;
-  const { username } = req.body;
-  let path = avatarUrl;
-  try {
-    path = req.file.path;
-  } catch (error) {
-    path = avatarUrl;
-  }
+  const {
+    session: {
+      user: { avatarUrl, _id },
+    },
+  } = req;
+  const {
+    body: { username },
+    file,
+  } = req;
+  const isHeroku = process.env.NODE_ENV === "production";
   const updatedUser = await Users.findByIdAndUpdate(
     _id,
     {
       username,
-      avatarUrl: path,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
     },
     { new: true }
   );

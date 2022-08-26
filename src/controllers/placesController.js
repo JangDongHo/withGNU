@@ -31,7 +31,6 @@ export const search = async (req, res) => {
 export const info = async (req, res) => {
   const { id } = req.params;
   const mapId = process.env.MAPCLIENTID;
-  console.log(mapId);
   const place = await Place.findById(id).populate({
     path: "comments",
     populate: { path: "owner" },
@@ -63,9 +62,10 @@ export const createComment = async (req, res) => {
     files: { commentImg },
   } = req;
   const filePaths = [];
+  const isHeroku = process.env.NODE_ENV === "production";
   if (commentImg) {
     for (let i = 0; i < commentImg.length; i++) {
-      filePaths.push(commentImg[i].path);
+      filePaths.push(isHeroku ? commentImg[i].location : commentImg[i].path);
     }
   }
   try {
