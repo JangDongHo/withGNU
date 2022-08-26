@@ -11,13 +11,13 @@ const s3 = new aws.S3({
 
 const s3AvatarUploader = multerS3({
   s3: s3,
-  bucket: "wetube-dongho/avatars",
+  bucket: "withgnu/avatars",
   acl: "public-read",
 });
 
 const s3PlaceImgUploader = multerS3({
   s3: s3,
-  bucket: "wetube-dongho/reviews",
+  bucket: "withgnu/reviews",
   acl: "public-read",
 });
 
@@ -28,6 +28,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
   res.locals.isHeroku = isHeroku;
+  res.locals.basicProfile =
+    "https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png";
   next();
 };
 
