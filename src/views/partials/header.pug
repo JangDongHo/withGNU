@@ -10,9 +10,9 @@ header.header-wrapper
               img(src=basicProfile)
             else
               if isHeroku
-                img(src=`/${loggedInUser.avatarUrl}`)
-              else
                 img(src=`${loggedInUser.avatarUrl}`)
+              else
+                img(src=`/${loggedInUser.avatarUrl}`)
       else
         li
           a(href="/login").loginBtn 로그인
