@@ -8,7 +8,11 @@
     "url": "git+https://github.com/JangDongHo/eatGNUv2.git"
   },
   "scripts": {
-    "dev:servers": "nodemon",
+    "start": "node build/init.js",
+    "build": "npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
+    "dev:server": "nodemon",
     "dev:assets": "webpack --mode=development -w",
     "parser": "babel-node addDatabase/parser.js"
   },
