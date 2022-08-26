@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BASE_JS = "./src/client/js/";
 
 module.exports = {
-  watch: true,
   entry: {
     main: BASE_JS + "main.js",
     commentSection: BASE_JS + "commentSection.js",
