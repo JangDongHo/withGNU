@@ -30,6 +30,8 @@ export const search = async (req, res) => {
 
 export const info = async (req, res) => {
   const { id } = req.params;
+  const mapId = process.env.MAPCLIENTID;
+  console.log(mapId);
   const place = await Place.findById(id).populate({
     path: "comments",
     populate: { path: "owner" },
@@ -47,6 +49,7 @@ export const info = async (req, res) => {
     pageTitle: place.name,
     place,
     scrapClicked,
+    mapId,
   });
 };
 

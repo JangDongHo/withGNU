@@ -1,0 +1,16 @@
+#map {
+  z-index: 3;
+}
+
+.mapModal {
+  align-items: center;
+  @include tablet {
+    align-items: baseline;
+    background-color: white;
+  }
+  .modal-overlay {
+    @include tablet {
+      display: none;
+    }
+  }
+}

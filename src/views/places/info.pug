@@ -30,7 +30,7 @@ block content
         span  #{place.comments.length}
         i.fa-solid.fa-bookmark
         span  #{place.meta.likes}
-    div.map-layer
+    div(id="map" data-href=`${place.naver_map_url}`).map-layer
     div.info-wrapper
       div.infos
         span=place.info.location
@@ -57,6 +57,8 @@ block content
 
         
 block scripts
+  script(type="text/javascript" src=src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=m60p7akqw3&submodules=geocoder")
   script(src="/static/js/commentSection.js")
   script(src="/static/js/imageScale.js")
   script(src="/static/js/placeScrap.js")
+  script(src="/static/js/map.js")

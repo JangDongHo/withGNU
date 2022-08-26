@@ -12,6 +12,7 @@ module.exports = {
     placeScrap: BASE_JS + "placeScrap.js",
     middleware: BASE_JS + "middleware.js",
     changeAvartar: BASE_JS + "changeAvartar.js",
+    map: BASE_JS + "map.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
