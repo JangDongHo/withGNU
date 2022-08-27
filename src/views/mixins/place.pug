@@ -7,7 +7,10 @@ mixin place(place)
         else
           img(src=`/${place.photoUrl[0]}`)
       else
-        img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
+        if isHeroku
+          img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
+        else 
+          img(src="/uploads/basicPlaceImg.jpg")
       div.placeBox__info
         div.placeBox__info__header
           h1=place.name
