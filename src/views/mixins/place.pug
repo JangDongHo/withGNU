@@ -7,7 +7,7 @@ mixin place(place)
         else
           img(src=`/${place.photoUrl[0]}`)
       else
-        img(src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80")
+        img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
       div.placeBox__info
         div.placeBox__info__header
           h1=place.name

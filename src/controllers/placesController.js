@@ -164,7 +164,6 @@ export const deleteComment = async (req, res) => {
       (Number(comment.place.meta.rating) * person - Number(reviewRating)) /
       (person - 1);
   }
-  console.log(rating);
   await Place.findByIdAndUpdate(
     placeId,
     {

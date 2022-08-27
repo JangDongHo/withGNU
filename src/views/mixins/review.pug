@@ -4,7 +4,13 @@ mixin review(place)
       a(href=`/users/${comment.owner.id}`)
         div.placeReview__header
           div.placeReview__headerInfo-wrapper
-            img(src="https://img5.yna.co.kr/etc/inner/KR/2022/04/14/AKR20220414131000052_02_i_P2.jpg")
+            if comment.owner.avatarUrl === ""
+              img(src=basicProfile)
+            else
+              if isHeroku
+                img(src=`${comment.owner.avatarUrl}`, crossorigin)
+              else
+                img(src=`/${comment.owner.avatarUrl}`)
             div.placeReview__headerInfo
               h1=comment.owner.username
               p
