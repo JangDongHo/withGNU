@@ -13,12 +13,14 @@ const s3AvatarUploader = multerS3({
   s3: s3,
   bucket: "withgnu/avatars",
   acl: "public-read",
+  contenttype: "image/jpeg",
 });
 
 const s3PlaceImgUploader = multerS3({
   s3: s3,
   bucket: "withgnu/reviews",
   acl: "public-read",
+  contenttype: "image/jpeg",
 });
 
 const isHeroku = process.env.NODE_ENV === "production";
