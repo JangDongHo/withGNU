@@ -3,9 +3,9 @@ mixin place(place)
     div.placeBox
       if place.photoUrl.length !== 0
         if isHeroku
-          img(src=`${place.photoUrl[0]}`, crossorigin)
+          img(src=`${place.photoUrl[place.photoUrl.length-1]}`, crossorigin)
         else
-          img(src=`/${place.photoUrl[0]}`)
+          img(src=`/${place.photoUrl[place.photoUrl.length-1]}`)
       else
         if isHeroku
           img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
