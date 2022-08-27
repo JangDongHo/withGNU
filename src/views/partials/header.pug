@@ -10,7 +10,7 @@ header.header-wrapper
               img(src=basicProfile)
             else
               if isHeroku
-                img(src=`${loggedInUser.avatarUrl}`, crossorigin="anonymous")
+                img(src=`${loggedInUser.avatarUrl}`)
               else
                 img(src=`/${loggedInUser.avatarUrl}`)
       else
