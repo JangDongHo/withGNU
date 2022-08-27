@@ -31,7 +31,10 @@ mixin review(place)
         span=comment.text
       div.placeReview__images
         each image in comment.photoUrl
-          img(src=`/${image}`)#commentImageBtn
+          if isHeroku
+            img#commentImageBtn(src=`${image}`, crossorigin)
+          else
+            img#commentImageBtn(src=`/${image}`)
       p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
       if String(comment.owner.id) === String(loggedInUser._id)
         div.placeReview__action

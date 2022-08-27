@@ -13,7 +13,10 @@ block content
               if user.avatarUrl === ""
                 img#previewImage(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
               else
-                img#previewImage(src=`/${user.avatarUrl}`)
+                if isHeroku
+                  img#previewImage(src=`${user.avatarUrl}`, crossorigin)
+                else
+                  img#previewImage(src=`/${user.avatarUrl}`)
             input(type="file" id="avartarImage", name="avartarImage" accept="image/*")
         div.nickname-wrapper
           label(for="username") 닉네임

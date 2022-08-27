@@ -10,7 +10,11 @@ block modal
 block content
   div.placeImg-wrapper#headerImages
     each photo in place.photoUrl.reverse()
-      img.placeImg#headerImageBtn(src=`/${photo}`)
+      if isHeroku
+        img.placeImg#headerImageBtn(src=`${photo}`, crossorigin)
+      else
+        img.placeImg#headerImageBtn(src=`/${photo}`)
+      
   section.placeInfo-wrapper#placeInfoContainer
     header.placeInfo-header
       div.placeInfo-header__title

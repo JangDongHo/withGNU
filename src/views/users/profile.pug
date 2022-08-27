@@ -11,7 +11,10 @@ block content
         if user.avatarUrl === ""
           img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
         else
-          img(src=`/${user.avatarUrl}`)
+          if isHeroku
+            img(src=`${user.avatarUrl}`, crossorigin)
+          else
+            img(src=`/${user.avatarUrl}`)
     a(href="/users/edit-profile")
       h1.profile-name=user.username
         if String(id) === String(loggedInUser._id)
@@ -28,7 +31,10 @@ block content
           div.placeReview__header
             div.placeReview__headerInfo-wrapper
               if comment.place.photoUrl[0]
-                img(src=`/${comment.place.photoUrl[0]}`)
+                if isHeroku
+                  img(src=`${comment.place.photoUrl[0]}`, crossorigin)
+                else
+                  img(src=`/${comment.place.photoUrl[0]}`)
               else
                 img(src=`https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80`)
               h1=comment.place.name
@@ -53,7 +59,10 @@ block content
             span=comment.text
           div.placeReview__images
             each image in comment.photoUrl
-              img(src=`/${image}`)#commentImageBtn
+              if isHeroku
+                img(src=`${image}`, crossorigin)#commentImageBtn
+              else
+                img(src=`/${image}`)#commentImageBtn
           p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
     h1.profileReview-title #{user.username}님의 스크랩 (#{user.likes.length})
     div.placeProfileBox-wrapper
