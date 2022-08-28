@@ -19,6 +19,6 @@ apiRouter
   .route("/comments/:id([0-9a-f]{24})/edit")
   .all(protectorMiddleware)
   .post(placeImgUpload.fields([{ name: "commentImg" }]), editComment)
-  .delete(deletePlaceImg, deleteComment);
+  .delete(deleteComment, deletePlaceImg);
 
 export default apiRouter;
