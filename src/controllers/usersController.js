@@ -68,7 +68,7 @@ export const emailAuth = async (req, res) => {
     const mailOptions = {
       from: process.env.NODEMAILER_USER,
       to: email,
-      subject: "[eatGNU]인증 관련 이메일 입니다",
+      subject: "[withGNU]인증 관련 이메일 입니다",
       text: "오른쪽 숫자 6자리를 입력해주세요 : " + randomNum,
     };
 

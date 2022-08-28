@@ -173,6 +173,9 @@ export const deleteComment = async (req, res) => {
     },
     { new: true }
   );
+  await Users.findByIdAndUpdate(user._id, {
+    $pull: { comments: id.toString("hex") },
+  });
   await Comment.findByIdAndDelete(id);
   return res.sendStatus(200);
 };
