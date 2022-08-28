@@ -31,25 +31,31 @@ export const search = async (req, res) => {
 export const info = async (req, res) => {
   const { id } = req.params;
   const mapId = process.env.MAPCLIENTID;
-  const place = await Place.findById(id).populate({
-    path: "comments",
-    populate: { path: "owner" },
-  });
-  let scrapClicked = false;
-  if (req.session.loggedIn) {
-    const userId = req.session.user._id;
-    const user = await Users.findById(userId);
-    const likes = user.likes;
-    scrapClicked = likes.includes(id);
+  try {
+    const place = await Place.findById(id).populate({
+      path: "comments",
+      populate: { path: "owner" },
+    });
+    let scrapClicked = false;
+    if (req.session.loggedIn) {
+      const userId = req.session.user._id;
+      const user = await Users.findById(userId);
+      const likes = user.likes;
+      scrapClicked = likes.includes(id);
+    }
+    place.meta.views += 1;
+    await place.save();
+    return res.render("places/info", {
+      pageTitle: place.name,
+      place,
+      scrapClicked,
+      mapId,
+    });
+  } catch (error) {
+    console.log(error);
+    req.flash("error", error);
+    return res.redirect("/");
   }
-  place.meta.views += 1;
-  await place.save();
-  return res.render("places/info", {
-    pageTitle: place.name,
-    place,
-    scrapClicked,
-    mapId,
-  });
 };
 
 export const createComment = async (req, res) => {
