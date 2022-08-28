@@ -36,7 +36,10 @@ block content
                 else
                   img(src=`/${comment.place.photoUrl[0]}`)
               else
-                img(src=`https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&crop=*:*;*,*&output-format=jpg&output-quality=80`)
+                if isHeroku
+                  img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
+                else 
+                  img(src="/uploads/basicPlaceImg.jpg")
               h1=comment.place.name
             div.rating-wrapper
               case comment.rating
