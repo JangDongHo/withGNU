@@ -1,6 +1,7 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
+import fs from "fs";
 
 const s3 = new aws.S3({
   credentials: {
@@ -56,7 +57,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
 export const placeImgUpload = multer({
   dest: "uploads/placeImg/",
   limits: {
-    fileSize: 10000000000,
+    fileSize: 3 * 1024 * 1024,
   },
   storage: isHeroku ? s3PlaceImgUploader : undefined,
 });
@@ -64,7 +65,35 @@ export const placeImgUpload = multer({
 export const avartarImgUpload = multer({
   dest: "uploads/avartarImg/",
   limits: {
-    fileSize: 3000000,
+    fileSize: 2 * 1024 * 1024,
   },
   storage: isHeroku ? s3AvatarUploader : undefined,
 });
+
+export const deleteAvatarImg = (req, res, next) => {
+  if (!req.file) {
+    return next();
+  }
+  if (isHeroku) {
+    console.log(req.session.user.avatarUrl.split("/"));
+    s3.deleteObject(
+      {
+        Bucket: "withgnu/avatars",
+        Key: `${req.session.user.avatarUrl.split("/")[4]}`,
+      },
+      (err, data) => {
+        if (err) {
+          throw err;
+        }
+        console.log(`s3 deleteObject`, data);
+      }
+    );
+  } else {
+    try {
+      fs.unlinkSync(`./${req.session.user.avatarUrl}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  next();
+};

@@ -7,7 +7,16 @@ block modal
 block content
   div.profile-wrapper
     div.profile-img
-      a(href="/users/edit-profile")
+      if String(id) === String(loggedInUser._id)
+        a(href="/users/edit-profile")
+          if user.avatarUrl === ""
+            img(src=basicProfile)
+          else
+            if isHeroku
+              img(src=`${user.avatarUrl}`, crossorigin)
+            else
+              img(src=`/${user.avatarUrl}`)
+      else
         if user.avatarUrl === ""
           img(src=basicProfile)
         else
@@ -15,10 +24,12 @@ block content
             img(src=`${user.avatarUrl}`, crossorigin)
           else
             img(src=`/${user.avatarUrl}`)
-    a(href="/users/edit-profile")
-      h1.profile-name=user.username
-        if String(id) === String(loggedInUser._id)
+    if String(id) === String(loggedInUser._id)
+      a(href="/users/edit-profile")
+        h1.profile-name=user.username
           i.fa-solid.fa-pen
+    else
+      h1.profile-name=user.username
     if String(id) === String(loggedInUser._id)
       div.profile-action
         a(href="/users/edit-password").btn.edit 비밀번호 수정
