@@ -75,7 +75,6 @@ export const deleteAvatarImg = (req, res, next) => {
     return next();
   }
   if (isHeroku) {
-    console.log(req.session.user.avatarUrl.split("/"));
     s3.deleteObject(
       {
         Bucket: "withgnu/avatars",
@@ -85,7 +84,6 @@ export const deleteAvatarImg = (req, res, next) => {
         if (err) {
           throw err;
         }
-        console.log(`s3 deleteObject`, data);
       }
     );
   } else {
@@ -95,5 +93,26 @@ export const deleteAvatarImg = (req, res, next) => {
       console.log(error);
     }
   }
+  next();
+};
+
+export const deletePlaceImg = (req, res, next) => {
+  const {
+    body: { imagePaths },
+  } = req;
+  imagePaths.forEach((image) => {
+    try {
+      if (isHeroku) {
+        s3.deleteObject({
+          Bucket: "withgnu/reviews",
+          Key: `${image.split("/")[4]}`,
+        });
+      } else {
+        fs.unlinkSync(`./${image}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
   next();
 };

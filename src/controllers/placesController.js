@@ -52,8 +52,6 @@ export const info = async (req, res) => {
       mapId,
     });
   } catch (error) {
-    console.log(error);
-    req.flash("error", error);
     return res.redirect("/");
   }
 };

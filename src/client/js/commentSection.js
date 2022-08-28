@@ -103,10 +103,9 @@ const handleDeleteBtn = async (event) => {
   try {
     const images = review.querySelectorAll(".placeReview__images > img");
     images.forEach((image) => {
+      const imageSrc = image.getAttribute("src");
       imagePaths.push(
-        image[0] === "/"
-          ? image.getAttribute("src").substr(1)
-          : image.getAttribute("src")
+        imageSrc.charAt(0) === "/" ? imageSrc.substr(1) : imageSrc
       );
     });
   } catch (error) {}

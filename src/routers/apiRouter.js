@@ -5,7 +5,11 @@ import {
   placeScrap,
 } from "../controllers/placesController";
 import { checkLogin } from "../controllers/usersController";
-import { placeImgUpload, protectorMiddleware } from "../middlewares";
+import {
+  placeImgUpload,
+  protectorMiddleware,
+  deletePlaceImg,
+} from "../middlewares";
 
 const apiRouter = express.Router();
 
@@ -15,6 +19,6 @@ apiRouter
   .route("/comments/:id([0-9a-f]{24})/edit")
   .all(protectorMiddleware)
   .post(placeImgUpload.fields([{ name: "commentImg" }]), editComment)
-  .delete(deleteComment);
+  .delete(deletePlaceImg, deleteComment);
 
 export default apiRouter;
