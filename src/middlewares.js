@@ -75,6 +75,7 @@ export const deleteAvatarImg = (req, res, next) => {
     return next();
   }
   if (isHeroku) {
+    console.log(req.session.user.avatarUrl.split("/")[4]);
     s3.deleteObject(
       {
         Bucket: "withgnu/avatars",
@@ -103,6 +104,7 @@ export const deletePlaceImg = (req, res, next) => {
   imagePaths.forEach((image) => {
     try {
       if (isHeroku) {
+        console.log(image.split("/")[4]);
         s3.deleteObject({
           Bucket: "withgnu/reviews",
           Key: `${image.split("/")[4]}`,
