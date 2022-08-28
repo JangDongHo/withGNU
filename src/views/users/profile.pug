@@ -9,7 +9,7 @@ block content
     div.profile-img
       a(href="/users/edit-profile")
         if user.avatarUrl === ""
-          img(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
+          img(src=basicProfile)
         else
           if isHeroku
             img(src=`${user.avatarUrl}`, crossorigin)
