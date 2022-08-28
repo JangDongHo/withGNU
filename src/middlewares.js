@@ -102,10 +102,11 @@ export const deletePlaceImg = (req, res, next) => {
   } = req;
   imagePaths.forEach((image) => {
     try {
+      console.log(image.split("/"));
       if (isHeroku) {
         s3.deleteObject({
           Bucket: "withgnu/reviews",
-          Key: `${image.split("/")[4]}`,
+          Key: `${image.split("/")[3]}`,
         });
       } else {
         fs.unlinkSync(`./${image}`);
