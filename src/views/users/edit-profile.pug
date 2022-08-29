@@ -17,7 +17,7 @@ block content
                   img#previewImage(src=`${user.avatarUrl}`, crossorigin)
                 else
                   img#previewImage(src=`/${user.avatarUrl}`)
-            input(type="file" id="avartarImage", name="avartarImage" accept="image/gif, image/jpeg, image/png")
+            input(type="file" id="avartarImage", name="avartarImage" accept="image/jpg, image/jpeg, image/png")
         div.nickname-wrapper
           label(for="username") 닉네임
           input(placeholder="닉네임" name="username" id="username" type="text", value=`${user.username}` required)
