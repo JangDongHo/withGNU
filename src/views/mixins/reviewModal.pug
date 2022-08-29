@@ -36,5 +36,5 @@ mixin reviewModal(place)
         div.uploadBtns-wrapper
           div.upload-wrapper
             label(for="commentImg") +
-            input(type="file" id="commentImg", name="commentImg" accept="image/*" multiple)
+            input(type="file" id="commentImg", name="commentImg" accept="image/gif, image/jpeg, image/png" multiple)
           button(disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록

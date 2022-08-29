@@ -18,7 +18,10 @@ apiRouter.post("/places/:id([0-9a-f]{24})/scrap", placeScrap);
 apiRouter
   .route("/comments/:id([0-9a-f]{24})/edit")
   .all(protectorMiddleware)
-  .post(placeImgUpload.fields([{ name: "commentImg" }]), editComment)
+  .post(
+    placeImgUpload.fields([{ name: "commentImg", maxCount: 3 }]),
+    editComment
+  )
   .delete(deletePlaceImg, deleteComment);
 
 export default apiRouter;

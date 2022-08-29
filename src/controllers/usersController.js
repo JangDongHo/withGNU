@@ -151,26 +151,31 @@ export const postEditProfile = async (req, res) => {
     session: {
       user: { avatarUrl, _id },
     },
-  } = req;
-  const {
     body: { username },
+    fileValidationError,
     file,
   } = req;
-  const isHeroku = process.env.NODE_ENV === "production";
-  try {
-    const updatedUser = await Users.findByIdAndUpdate(
-      _id,
-      {
-        username,
-        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
-      },
-      { new: true }
-    );
-    req.session.user = updatedUser;
-    return res.redirect(`/users/${_id}`);
-  } catch (error) {
-    req.flash("error", JSON.stringify(error));
+  // 허용하지 않는 파일일 경우
+  if (fileValidationError) {
+    req.flash("error", fileValidationError);
     return res.redirect(`/users/edit-profile`);
+  } else {
+    const isHeroku = process.env.NODE_ENV === "production";
+    try {
+      const updatedUser = await Users.findByIdAndUpdate(
+        _id,
+        {
+          username,
+          avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
+        },
+        { new: true }
+      );
+      req.session.user = updatedUser;
+      return res.redirect(`/users/${_id}`);
+    } catch (error) {
+      req.flash("error", JSON.stringify(error));
+      return res.redirect(`/users/edit-profile`);
+    }
   }
 };
 

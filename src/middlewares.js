@@ -54,21 +54,49 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
+const placeImageFilter = (req, file, cb) => {
+  const imagesSize = parseInt(req.headers["content-length"]);
+  const typeArray = file.mimetype.split("/");
+  const fileType = typeArray[1];
+  const acceptFileType = ["jpg", "png", "jpeg"];
+  if (imagesSize >= 12 * 1024 * 1024) {
+    req.fileValidationError = "파일 크기가 너무 큽니다. (최대 12MB)";
+    return cb(null, false);
+  }
+  if (!acceptFileType.includes(fileType)) {
+    req.fileValidationError = "jpg, jpeg, png 파일만 업로드 가능합니다.";
+    return cb(null, false);
+  }
+  return cb(null, true);
+};
+
+const avatarImageFilter = (req, file, cb) => {
+  const imagesSize = parseInt(req.headers["content-length"]);
+  const typeArray = file.mimetype.split("/");
+  const fileType = typeArray[1];
+  const acceptFileType = ["jpg", "png", "jpeg"];
+  if (imagesSize >= 3 * 1024 * 1024) {
+    req.fileValidationError = "파일 크기가 너무 큽니다. (최대 3MB)";
+    return cb(null, false);
+  }
+  if (!acceptFileType.includes(fileType)) {
+    req.fileValidationError = "jpg, jpeg, png 파일만 업로드 가능합니다.";
+    return cb(null, false);
+  }
+  return cb(null, true);
+};
+
 export const placeImgUpload = multer({
   dest: "uploads/placeImg/",
-  limits: {
-    fileSize: 3 * 1024 * 1024,
-  },
+  fileFilter: placeImageFilter,
   storage: isHeroku ? s3PlaceImgUploader : undefined,
 });
 
 export const avartarImgUpload = multer({
   dest: "uploads/avartarImg/",
-  limits: {
-    fileSize: 2 * 1024 * 1024,
-  },
+  fileFilter: avatarImageFilter,
   storage: isHeroku ? s3AvatarUploader : undefined,
-});
+}).single("avartarImage");
 
 export const deleteAvatarImg = (req, res, next) => {
   if (!req.file) {

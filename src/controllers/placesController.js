@@ -64,41 +64,47 @@ export const createComment = async (req, res) => {
     body: { commentReview, commentRating },
     params: { id },
     files: { commentImg },
+    fileValidationError,
   } = req;
-  const filePaths = [];
-  const isHeroku = process.env.NODE_ENV === "production";
-  if (commentImg) {
-    for (let i = 0; i < commentImg.length; i++) {
-      filePaths.push(isHeroku ? commentImg[i].location : commentImg[i].path);
-    }
-  }
-  try {
-    const newComment = await Comment.create({
-      text: commentReview,
-      owner: _id,
-      rating: commentRating,
-      place: id,
-      photoUrl: filePaths,
-    });
-    const user = await Users.findById(_id);
-    user.comments.push(newComment._id);
-    user.save();
-    const place = await Place.findById(id);
-    place.comments.push(newComment._id);
-    filePaths.forEach((filePath) => {
-      place.photoUrl.push(filePath);
-    });
-    // 식당 평점 계산
-    place.meta.rating = (
-      (place.meta.rating * (Number(place.comments.length) - 1) +
-        Number(commentRating)) /
-      Number(place.comments.length)
-    ).toFixed(1);
-    place.save();
+  if (fileValidationError) {
+    req.flash("error", fileValidationError);
     return res.redirect(`/places/${id}`);
-  } catch (error) {
-    req.flash("error", JSON.stringify(error));
-    return res.redirect("/");
+  } else {
+    const filePaths = [];
+    const isHeroku = process.env.NODE_ENV === "production";
+    if (commentImg) {
+      for (let i = 0; i < commentImg.length; i++) {
+        filePaths.push(isHeroku ? commentImg[i].location : commentImg[i].path);
+      }
+    }
+    try {
+      const newComment = await Comment.create({
+        text: commentReview,
+        owner: _id,
+        rating: commentRating,
+        place: id,
+        photoUrl: filePaths,
+      });
+      const user = await Users.findById(_id);
+      user.comments.push(newComment._id);
+      user.save();
+      const place = await Place.findById(id);
+      place.comments.push(newComment._id);
+      filePaths.forEach((filePath) => {
+        place.photoUrl.push(filePath);
+      });
+      // 식당 평점 계산
+      place.meta.rating = (
+        (place.meta.rating * (Number(place.comments.length) - 1) +
+          Number(commentRating)) /
+        Number(place.comments.length)
+      ).toFixed(1);
+      place.save();
+      return res.redirect(`/places/${id}`);
+    } catch (error) {
+      req.flash("error", JSON.stringify(error));
+      return res.redirect("/");
+    }
   }
 };
 

@@ -22,11 +22,7 @@ userRouter
   .route("/edit-profile")
   .all(protectorMiddleware)
   .get(getEditProfile)
-  .post(
-    avartarImgUpload.single("avartarImage"),
-    deleteAvatarImg,
-    postEditProfile
-  );
+  .post(avartarImgUpload, deleteAvatarImg, postEditProfile);
 userRouter
   .route("/edit-password")
   .all(protectorMiddleware)
