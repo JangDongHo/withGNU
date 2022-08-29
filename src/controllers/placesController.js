@@ -97,7 +97,7 @@ export const createComment = async (req, res) => {
     place.save();
     return res.redirect(`/places/${id}`);
   } catch (error) {
-    req.flash("error", error);
+    req.flash("error", JSON.stringify(error));
     return res.redirect("/");
   }
 };

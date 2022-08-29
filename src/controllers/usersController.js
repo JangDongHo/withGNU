@@ -37,7 +37,7 @@ export const emailAuth = async (req, res) => {
       });
       return res.redirect("/login");
     } catch (error) {
-      req.flash("error", error);
+      req.flash("error", JSON.stringify(error));
       return res.status(400).render("users/join/join-3", { pageTitle });
     }
   }
@@ -157,16 +157,21 @@ export const postEditProfile = async (req, res) => {
     file,
   } = req;
   const isHeroku = process.env.NODE_ENV === "production";
-  const updatedUser = await Users.findByIdAndUpdate(
-    _id,
-    {
-      username,
-      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
-    },
-    { new: true }
-  );
-  req.session.user = updatedUser;
-  return res.redirect(`/users/${_id}`);
+  try {
+    const updatedUser = await Users.findByIdAndUpdate(
+      _id,
+      {
+        username,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
+    return res.redirect(`/users/${_id}`);
+  } catch (error) {
+    req.flash("error", JSON.stringify(error));
+    return res.redirect(`/users/edit-profile`);
+  }
 };
 
 export const getEditPassword = (req, res) => {
