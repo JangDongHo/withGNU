@@ -60,6 +60,8 @@ const handleEditBtn = (event) => {
   const editComment = async () => {
     if (!isSubmitted) {
       isSubmitted = true; // 중복 form 제출 방지
+      reviewUploadBtn.disabled = true;
+      reviewUploadBtn.button.value = "등록중...";
       const newReviewRating = modal.querySelector(
         'input[name="commentRating"]:checked'
       ).value;
