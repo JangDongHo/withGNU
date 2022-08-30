@@ -34,7 +34,7 @@ const closeModal = () => {
 const createComment = (event) => {
   if (!isSubmitted) {
     isSubmitted = true;
-    event.preventDefault();
+    reviewUploadBtn.disabled = true;
     reviewUploadBtn.style.background = "white";
     reviewUploadBtn.style.color = "#adadad";
     reviewUploadBtn.innerText = "등록중...";
@@ -87,7 +87,7 @@ const handleEditBtn = (event) => {
   const closeEditModal = () => {
     if (!isSubmitted) {
       isSubmitted = true;
-      event.preventDefault();
+      reviewUploadBtn.disabled = true;
       reviewUploadBtn.style.background = "white";
       reviewUploadBtn.style.color = "#adadad";
       reviewUploadBtn.innerText = "수정중...";
