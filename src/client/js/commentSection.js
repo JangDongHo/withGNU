@@ -12,8 +12,6 @@ const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
 const scrapBtn = document.getElementById("scrapBtn");
 
-let isSubmitted = false;
-
 const handleSubmitBtn = () => {
   if (textarea.value === "") {
     reviewUploadBtn.disabled = true;
@@ -58,25 +56,21 @@ const addEditBtnEvent = () => {
 
 const handleEditBtn = (event) => {
   const editComment = async () => {
-    if (!isSubmitted) {
-      isSubmitted = true; // 중복 form 제출 방지
-      reviewUploadBtn.disabled = true;
-      reviewUploadBtn.button.value = "등록중...";
-      const newReviewRating = modal.querySelector(
-        'input[name="commentRating"]:checked'
-      ).value;
-      const reviewText = document.getElementById("inputBox").value;
-      await fetch(`/api/comments/${reviewId}/edit`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ reviewText, oldReviewRating, newReviewRating }),
-      });
-      isSubmitted = false;
-      const placeId = scrapBtn.dataset.placeid;
-      window.location = `/places/${placeId}`;
-    }
+    event.preventDefault;
+    const newReviewRating = modal.querySelector(
+      'input[name="commentRating"]:checked'
+    ).value;
+    const reviewText = document.getElementById("inputBox").value;
+    await fetch(`/api/comments/${reviewId}/edit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ reviewText, oldReviewRating, newReviewRating }),
+    });
+    isSubmitted = false;
+    const placeId = scrapBtn.dataset.placeid;
+    window.location = `/places/${placeId}`;
   };
   const closeEditModal = () => {
     reviewUploadBtn.setAttribute("type", "submit");
