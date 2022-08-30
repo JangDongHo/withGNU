@@ -7,12 +7,23 @@ const textarea = document.querySelector("textarea");
 const closeModalBtn = document.getElementById("closeReviewModalBtn");
 const reviewUploadBtn = document.getElementById("reviewUploadBtn");
 const reviewModalOverlay = document.getElementById("reviewModalOverlay");
+const reviewForm = modal.querySelector("#reviewForm");
 
 const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
 const scrapBtn = document.getElementById("scrapBtn");
 
 let isSubmitted = false;
+
+const preventDoubleSubmit = (event) => {
+  if (!isSubmitted) {
+    isSubmitted = true;
+    reviewUploadBtn.disabled = true;
+    reviewUploadBtn.style.background = "white";
+    reviewUploadBtn.style.color = "#adadad";
+    reviewUploadBtn.innerText = "등록중...";
+  }
+};
 
 const handleSubmitBtn = () => {
   if (textarea.value === "") {
@@ -31,16 +42,6 @@ const closeModal = () => {
   modal.classList.add("hidden");
 };
 
-const createComment = (event) => {
-  if (!isSubmitted) {
-    isSubmitted = true;
-    reviewUploadBtn.disabled = true;
-    reviewUploadBtn.style.background = "white";
-    reviewUploadBtn.style.color = "#adadad";
-    reviewUploadBtn.innerText = "등록중...";
-  }
-};
-
 const openModal = async () => {
   const login = await checkLoggedIn();
   if (!login) {
@@ -49,7 +50,7 @@ const openModal = async () => {
     document.body.style.overflow = "hidden";
     modal.classList.remove("hidden");
     textarea.addEventListener("keyup", handleSubmitBtn);
-    reviewUploadBtn.addEventListener("click", createComment);
+    reviewForm.addEventListener("submit", preventDoubleSubmit);
     closeModalBtn.addEventListener("click", closeModal);
     reviewModalOverlay.addEventListener("click", closeModal);
   }
@@ -85,13 +86,6 @@ const handleEditBtn = (event) => {
     window.location = `/places/${placeId}`;
   };
   const closeEditModal = () => {
-    if (!isSubmitted) {
-      isSubmitted = true;
-      reviewUploadBtn.disabled = true;
-      reviewUploadBtn.style.background = "white";
-      reviewUploadBtn.style.color = "#adadad";
-      reviewUploadBtn.innerText = "수정중...";
-    }
     reviewUploadBtn.setAttribute("type", "submit");
     textarea.value = "";
     reviewUploadBtn.removeEventListener("click", editComment);

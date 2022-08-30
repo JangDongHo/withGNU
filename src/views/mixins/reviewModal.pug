@@ -5,7 +5,7 @@ mixin reviewModal(place)
       div.modal-contents__header
         i.fa-solid.fa-angle-left#closeReviewModalBtn
         span 리뷰 작성
-      form.reviewForm(method="POST" enctype="multipart/form-data")
+      form.reviewForm(method="POST" enctype="multipart/form-data")#reviewForm
         div.ratings-wrapper
           div.ratingBtn-wrapper
             input(type="radio", name="commentRating", id="rate1", value="1").ratingBtn
@@ -37,4 +37,4 @@ mixin reviewModal(place)
           div.upload-wrapper
             label(for="commentImg") +
             input(type="file" id="commentImg", name="commentImg" accept="image/jpg, image/jpeg, image/png" multiple)
-          button(disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록
+          button(type="submit" disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록
