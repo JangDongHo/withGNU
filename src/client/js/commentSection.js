@@ -56,6 +56,7 @@ const addEditBtnEvent = () => {
 
 const handleEditBtn = (event) => {
   const editComment = async () => {
+    reviewUploadBtn.disabled = true;
     const newReviewRating = modal.querySelector(
       'input[name="commentRating"]:checked'
     ).value;

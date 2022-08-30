@@ -65,7 +65,6 @@ export const createComment = async (req, res) => {
     params: { id },
     files: { commentImg },
     fileValidationError,
-    rateLimit,
   } = req;
   if (fileValidationError) {
     req.flash("error", fileValidationError);
