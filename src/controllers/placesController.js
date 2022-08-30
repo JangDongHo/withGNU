@@ -181,7 +181,7 @@ export const deleteComment = async (req, res) => {
     placeId,
     {
       $pull: { comments: id.toString("hex") },
-      $set: { meta: { rating: rating } },
+      "meta.rating": rating,
       $pullAll: { photoUrl: imagePaths },
     },
     { new: true }
