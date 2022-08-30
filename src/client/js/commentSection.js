@@ -34,6 +34,7 @@ const closeModal = () => {
 const createComment = (event) => {
   if (!isSubmitted) {
     isSubmitted = true;
+    event.preventDefault();
     reviewUploadBtn.style.background = "white";
     reviewUploadBtn.style.color = "#adadad";
     reviewUploadBtn.innerText = "등록중...";
@@ -84,6 +85,13 @@ const handleEditBtn = (event) => {
     window.location = `/places/${placeId}`;
   };
   const closeEditModal = () => {
+    if (!isSubmitted) {
+      isSubmitted = true;
+      event.preventDefault();
+      reviewUploadBtn.style.background = "white";
+      reviewUploadBtn.style.color = "#adadad";
+      reviewUploadBtn.innerText = "수정중...";
+    }
     reviewUploadBtn.setAttribute("type", "submit");
     textarea.value = "";
     reviewUploadBtn.removeEventListener("click", editComment);
