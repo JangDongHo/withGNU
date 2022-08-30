@@ -100,11 +100,15 @@ main {
     }
   }
   &.info {
-    background-color: lightseagreen;
+    background-color: royalblue;
     color: white;
   }
   &.error {
     background-color: tomato;
+    color: white;
+  }
+  &.success {
+    background-color: lightseagreen;
     color: white;
   }
 }

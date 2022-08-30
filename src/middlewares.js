@@ -2,6 +2,7 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 import fs from "fs";
+import rateLimit from "express-rate-limit";
 
 const s3 = new aws.S3({
   credentials: {
@@ -53,6 +54,21 @@ export const publicOnlyMiddleware = (req, res, next) => {
     return res.redirect("/");
   }
 };
+
+export const expressRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "너무 많은 작업을 요청하고 있습니다.",
+});
+
+export const reviewRateLimit = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 1,
+  handler: function (req, res, next) {
+    req.flash("error", "리뷰 작성은 분당 최대 1개까지만 허용하고 있습니다.");
+    return res.redirect(`/places/${req.params.id}`);
+  },
+});
 
 const placeImageFilter = (req, file, cb) => {
   const imagesSize = parseInt(req.headers["content-length"]);

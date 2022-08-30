@@ -6,7 +6,7 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import placesRouter from "./routers/placesRouter";
 import userRouter from "./routers/userRouter";
-import { localsMiddleware } from "./middlewares";
+import { localsMiddleware, expressRateLimit } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
 
 const app = express();
@@ -34,9 +34,9 @@ app.use(flash());
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
-app.use("/", rootRouter);
-app.use("/places", placesRouter);
-app.use("/users", userRouter);
-app.use("/api", apiRouter);
+app.use("/", expressRateLimit, rootRouter);
+app.use("/places", expressRateLimit, placesRouter);
+app.use("/users", expressRateLimit, userRouter);
+app.use("/api", expressRateLimit, apiRouter);
 
 export default app;

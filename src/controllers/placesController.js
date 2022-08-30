@@ -65,6 +65,7 @@ export const createComment = async (req, res) => {
     params: { id },
     files: { commentImg },
     fileValidationError,
+    rateLimit,
   } = req;
   if (fileValidationError) {
     req.flash("error", fileValidationError);
@@ -100,6 +101,7 @@ export const createComment = async (req, res) => {
         Number(place.comments.length)
       ).toFixed(1);
       place.save();
+      req.flash("success", JSON.stringify("리뷰가 성공적으로 등록되었습니다."));
       return res.redirect(`/places/${id}`);
     } catch (error) {
       req.flash("error", JSON.stringify(error));
@@ -179,7 +181,7 @@ export const deleteComment = async (req, res) => {
     placeId,
     {
       $pull: { comments: id.toString("hex") },
-      meta: { rating },
+      $set: { meta: { rating: rating } },
       $pullAll: { photoUrl: imagePaths },
     },
     { new: true }
