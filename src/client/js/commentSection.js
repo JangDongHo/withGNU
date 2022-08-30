@@ -12,6 +12,8 @@ const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
 const scrapBtn = document.getElementById("scrapBtn");
 
+let isSubmitted = false;
+
 const handleSubmitBtn = () => {
   if (textarea.value === "") {
     reviewUploadBtn.disabled = true;
@@ -29,6 +31,15 @@ const closeModal = () => {
   modal.classList.add("hidden");
 };
 
+const createComment = (event) => {
+  if (!isSubmitted) {
+    isSubmitted = true;
+    reviewUploadBtn.style.background = "white";
+    reviewUploadBtn.style.color = "#adadad";
+    reviewUploadBtn.innerText = "등록중...";
+  }
+};
+
 const openModal = async () => {
   const login = await checkLoggedIn();
   if (!login) {
@@ -37,6 +48,7 @@ const openModal = async () => {
     document.body.style.overflow = "hidden";
     modal.classList.remove("hidden");
     textarea.addEventListener("keyup", handleSubmitBtn);
+    reviewUploadBtn.addEventListener("click", createComment);
     closeModalBtn.addEventListener("click", closeModal);
     reviewModalOverlay.addEventListener("click", closeModal);
   }
@@ -56,7 +68,6 @@ const addEditBtnEvent = () => {
 
 const handleEditBtn = (event) => {
   const editComment = async () => {
-    event.preventDefault;
     const newReviewRating = modal.querySelector(
       'input[name="commentRating"]:checked'
     ).value;
