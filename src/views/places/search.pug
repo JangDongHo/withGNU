@@ -2,6 +2,9 @@ extends ../base
 include ../mixins/place
 
 block content
+  div.home-header
+    h1 당신을 위한
+    h2 <strong>##{search}</strong> 추천 장소
   div.placeBox-wrapper
     each place in places
       +place(place)

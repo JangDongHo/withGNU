@@ -17,7 +17,7 @@ mixin place(place)
           strong=place.meta.rating
         p.placeBox__info__hashtags
           each hashtag in place.info.hashtags
-            span #{hashtag} 
+            span ##{hashtag} 
         p.placeBox__info__etcs
           i.fa-solid.fa-eye
           span  #{place.meta.views}

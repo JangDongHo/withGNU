@@ -15,7 +15,9 @@ export const home = async (req, res) => {
   for (let i = 0; i < maxcount; i++) {
     const place = await Place.find({
       "info.hashtags": { $regex: new RegExp(hashtags[i], "i") },
-    }).limit(4);
+    })
+      .sort("-meta.rating")
+      .limit(4);
     places[hashtags[i]] = place;
   }
   return res.render("home", { pageTitle: "홈", places });
@@ -33,6 +35,7 @@ export const search = async (req, res) => {
     .sort("-meta.likes");
   return res.render("places/search", {
     pageTitle: "검색",
+    search,
     places,
   });
 };

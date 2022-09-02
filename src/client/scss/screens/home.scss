@@ -18,13 +18,23 @@
 }
 
 .tagBox-wrapper {
-  margin-bottom: 2rem;
-  .tagBox-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    span {
-      font-size: 0.9em;
+  margin-bottom: 3rem;
+  border-bottom: solid 10px $midgray;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    .tagBox-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      span {
+        font-size: 0.9em;
+        color: gray;
+      }
+    }
+    .tagBox-more {
+      cursor: pointer;
+      font-size: 1.2em;
       color: gray;
     }
   }
@@ -32,9 +42,15 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1.5rem;
+    margin-bottom: 3rem;
+    @include laptop {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @include mobile {
+      grid-template-columns: 1fr 1fr;
+    }
     .tagBox-place {
       height: 150px;
       background-color: lightgray;

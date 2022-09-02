@@ -4,11 +4,15 @@ include ./mixins/place
 block content
   div.home-header
     h1 당신을 위한
-    h2 <strong>가좌캠퍼스</strong> 추천 장소
+    h2 <strong class="keyword"></strong> 추천 장소
   each placeList, hashtag in places
     div.tagBox-wrapper
-      h1.tagBox-title=hashtag
-        span (#{placeList.length})
+      div.tagBox-wrapper__header
+        h1.tagBox-title ##{hashtag}
+        a(href=`/search?search=${hashtag}`)
+          div.tagBox-more 더보기 &rarr;
       div.tagBox-places
         each place in placeList
           +place(place)
+block scripts
+  script(src="/static/js/typeAnimation.js")

@@ -12,6 +12,7 @@ module.exports = {
     middleware: BASE_JS + "middleware.js",
     changeAvartar: BASE_JS + "changeAvartar.js",
     map: BASE_JS + "map.js",
+    typeAnimation: BASE_JS + "typeAnimation.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

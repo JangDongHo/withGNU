@@ -21,9 +21,7 @@ const placeSchema = new mongoose.Schema({
 });
 
 placeSchema.static("formatHashtags", function (hashtags) {
-  return hashtags
-    .split(",")
-    .map((word) => (word.startsWith("#") ? word : `#${word}`));
+  return hashtags.split(",");
 });
 
 const Place = mongoose.model("Place", placeSchema);
