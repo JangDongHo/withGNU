@@ -7,7 +7,7 @@ const textarea = document.querySelector("textarea");
 const closeModalBtn = document.getElementById("closeReviewModalBtn");
 const reviewUploadBtn = document.getElementById("reviewUploadBtn");
 const reviewModalOverlay = document.getElementById("reviewModalOverlay");
-const reviewForm = modal.querySelector("#reviewForm");
+const reviewForm = document.querySelector("#reviewForm");
 
 const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
