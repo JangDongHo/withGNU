@@ -3,13 +3,22 @@ import Users from "../models/Users";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
-  const places = await Place.find({});
+  const allPlaces = await Place.find({});
   const tmp = [];
-  places.forEach((place) => {
+  allPlaces.forEach((place) => {
     tmp.push(...place.info.hashtags);
   });
   const hashtags = [...new Set(tmp)];
-  return res.render("home", { pageTitle: "홈", hashtags });
+  hashtags.sort(() => Math.random() - 0.5);
+  let places = {};
+  let maxcount = hashtags.length > 10 ? 10 : hashtags.length;
+  for (let i = 0; i < maxcount; i++) {
+    const place = await Place.find({
+      "info.hashtags": { $regex: new RegExp(hashtags[i], "i") },
+    }).limit(4);
+    places[hashtags[i]] = place;
+  }
+  return res.render("home", { pageTitle: "홈", places });
 };
 
 export const search = async (req, res) => {
