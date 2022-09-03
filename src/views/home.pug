@@ -2,9 +2,12 @@ extends base
 include ./mixins/place
 
 block content
-  div.home-header
-    h1 당신을 위한
-    h2 <strong class="keyword"></strong> 추천 장소
+  div.home-header.box
+    <div class='wave -one'></div>
+    <div class='wave -two'></div>
+    <div class='wave -three'></div>
+    h1 경상대생들의 솔직한 리뷰
+    h2 <strong class="keyword">윗지앤유</strong>
   each placeList, hashtag in places
     div.tagBox-wrapper
       div.tagBox-wrapper__header
@@ -14,5 +17,3 @@ block content
       div.tagBox-places
         each place in placeList
           +place(place)
-block scripts
-  script(src="/static/js/typeAnimation.js")

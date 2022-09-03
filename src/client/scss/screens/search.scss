@@ -1,3 +1,23 @@
+.search-header {
+  font-size: 2.2rem;
+  text-align: center;
+  line-height: 2rem;
+  color: black;
+  margin-bottom: 50px;
+  padding: 5rem 5rem;
+  h1 {
+    font-size: 0.9em;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    strong {
+      border-bottom: solid 3px $main;
+      font-size: 1.1em;
+      font-weight: 700;
+    }
+  }
+}
+
 .placeBox-wrapper {
   width: 100%;
   max-width: 600px;
