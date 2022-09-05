@@ -1,6 +1,16 @@
 header.header-wrapper
-  a(href="/").header__logo
+  a(href="/").header__logo1
     span ㅇㅈㅇㅇ
+  a(href="/").header__logo2
+    span ㅇㅈ
+    i.fa-solid.fa-magnifying-glass
+  form.search-wrapper(method="GET" action="/search")
+    if search
+      input.search(placeholder="캠퍼스, 음식, 또는 장소명" autocomplete="off" name="search" value=search)
+    else
+      input.search(placeholder="캠퍼스, 음식, 또는 장소명" autocomplete="off" name="search")
+    button.searchBar
+      i.fa-solid.fa-magnifying-glass
   nav
     ul
       if loggedIn

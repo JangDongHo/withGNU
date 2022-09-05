@@ -25,19 +25,24 @@ export const home = async (req, res) => {
 
 export const search = async (req, res) => {
   const { search } = req.query;
-  const places = await Place.find({
-    $or: [
-      { name: { $regex: new RegExp(search, "i") } },
-      { "info.hashtags": { $regex: new RegExp(search, "i") } },
-    ],
-  })
-    .sort("-meta.rating")
-    .sort("-meta.likes");
-  return res.render("places/search", {
-    pageTitle: "검색",
-    search,
-    places,
-  });
+  try {
+    const places = await Place.find({
+      $or: [
+        { name: { $regex: new RegExp(search, "i") } },
+        { "info.hashtags": { $regex: new RegExp(search, "i") } },
+      ],
+    })
+      .sort("-meta.rating")
+      .sort("-meta.likes");
+    return res.render("places/search", {
+      pageTitle: "검색",
+      search,
+      places,
+    });
+  } catch (error) {
+    req.flash("error", "검색어에 특수기호를 포함시킬 수 없습니다.");
+    return res.redirect("/");
+  }
 };
 
 export const info = async (req, res) => {

@@ -3,6 +3,7 @@
   left: 0;
   z-index: 1;
   width: 100%;
+  min-height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,27 +19,107 @@
     $main
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
-  .header__logo {
+  @include tablet {
+    justify-content: flex-start;
+  }
+  .header__logo1 {
     font-size: 27px;
-    margin: 20px;
+    margin: 20px 20px;
     span {
       font-family: "Black Han Sans", sans-serif;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
+  .header__logo2 {
+    font-size: 22px;
+    writing-mode: vertical-rl;
+    display: none;
+    span {
+      font-family: "Black Han Sans", sans-serif;
+      margin-left: 12px;
+    }
+    i {
+      margin-left: 12px;
+      color: $lightmain;
+    }
+    @include tablet {
+      display: contents;
+    }
+  }
+  .search-wrapper {
+    position: absolute;
+    left: 30%;
+    width: 40%;
+    height: 40px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    @include tablet {
+      position: relative;
+      background-color: transparent;
+      left: 0;
+      width: 50%;
+    }
+    .search {
+      width: 90%;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      background-color: transparent;
+      margin-left: 30px;
+      @include tablet {
+        color: white;
+        font-weight: 500;
+        margin-left: 0;
+      }
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 16px;
+        font-weight: 700;
+        color: $gray;
+        @include tablet {
+          color: $lightmain;
+          font-weight: 500;
+        }
+      }
+    }
+    .searchBar {
+      color: black;
+      margin-right: 30px;
+      cursor: pointer;
+      font-size: 24px;
+      background-color: transparent;
+      border: none;
+      @include tablet {
+        display: none;
+      }
     }
   }
   ul {
     display: flex;
     align-items: center;
-    margin-right: 20px;
     li {
-      margin-left: 10px;
       font-size: 14px;
-      margin: 10px;
       font-weight: 700;
+      margin-right: 20px;
+      @include tablet {
+        position: absolute;
+        right: 0;
+      }
       .joinBtn {
         background-color: white;
         color: $main;
         padding: 10px 25px;
         border-radius: 7px;
+        @include mobile {
+          padding: 10px 15px;
+        }
       }
       @include mobile {
         .loginBtn {
