@@ -156,7 +156,7 @@ export const postEditProfile = async (req, res) => {
     session: {
       user: { avatarUrl, _id, username },
     },
-    body: { bodyUsername },
+    body: { avatarName },
     fileValidationError,
     file,
   } = req;
@@ -166,8 +166,8 @@ export const postEditProfile = async (req, res) => {
     return res.redirect(`/users/edit-profile`);
   }
   // 닉네임 중복 체크
-  if (username !== bodyUsername) {
-    const userExists = await Users.exists({ bodyUsername });
+  if (username !== avatarName) {
+    const userExists = await Users.exists({ username: avatarName });
     if (userExists) {
       req.flash("error", "같은 닉네임이 존재합니다.");
       return res.redirect(`/users/edit-profile`);
@@ -178,7 +178,7 @@ export const postEditProfile = async (req, res) => {
     const updatedUser = await Users.findByIdAndUpdate(
       _id,
       {
-        bodyUsername,
+        username: avatarName,
         avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       },
       { new: true }
