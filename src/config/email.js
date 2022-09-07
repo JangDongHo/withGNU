@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 
 const smtpTransport = nodemailer.createTransport({
+  pool: true,
   service: "Naver",
   host: "smtp.naver.com",
   port: 587,
