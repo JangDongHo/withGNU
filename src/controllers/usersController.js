@@ -71,18 +71,23 @@ export const emailAuth = async (req, res) => {
       subject: "[withGNU]인증 관련 이메일 입니다",
       text: "오른쪽 숫자 6자리를 입력해주세요 : " + randomNum,
     };
-
-    smtpTransport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(info);
-        req.session.email = email;
-        req.session.emailCode = randomNum;
-        return res.render("users/join/join-2", { pageTitle });
-      }
-      smtpTransport.close();
-    });
+    try {
+      smtpTransport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(info);
+          req.session.email = email;
+          req.session.emailCode = randomNum;
+          return res.render("users/join/join-2", { pageTitle });
+        }
+        smtpTransport.close();
+      });
+    } catch (error) {
+      req.flash("error", "이메일 발송 오류(관리자에게 문의해주세요.)");
+      console.log(error);
+      return res.status(400).render("users/join/join-1", { pageTitle });
+    }
   }
 };
 
@@ -149,7 +154,7 @@ export const getEditProfile = (req, res) => {
 export const postEditProfile = async (req, res) => {
   const {
     session: {
-      user: { avatarUrl, _id, originUsername },
+      user: { avatarUrl, _id, username },
     },
     body: { bodyUsername },
     fileValidationError,
@@ -161,7 +166,7 @@ export const postEditProfile = async (req, res) => {
     return res.redirect(`/users/edit-profile`);
   }
   // 닉네임 중복 체크
-  if (originUsername !== bodyUsername) {
+  if (username !== bodyUsername) {
     const userExists = await Users.exists({ bodyUsername });
     if (userExists) {
       req.flash("error", "같은 닉네임이 존재합니다.");
