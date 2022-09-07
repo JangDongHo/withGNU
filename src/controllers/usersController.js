@@ -149,9 +149,9 @@ export const getEditProfile = (req, res) => {
 export const postEditProfile = async (req, res) => {
   const {
     session: {
-      user: { avatarUrl, _id },
+      user: { avatarUrl, _id, originUsername },
     },
-    body: { username },
+    body: { bodyUsername },
     fileValidationError,
     file,
   } = req;
@@ -159,23 +159,30 @@ export const postEditProfile = async (req, res) => {
   if (fileValidationError) {
     req.flash("error", fileValidationError);
     return res.redirect(`/users/edit-profile`);
-  } else {
-    const isHeroku = process.env.NODE_ENV === "production";
-    try {
-      const updatedUser = await Users.findByIdAndUpdate(
-        _id,
-        {
-          username,
-          avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
-        },
-        { new: true }
-      );
-      req.session.user = updatedUser;
-      return res.redirect(`/users/${_id}`);
-    } catch (error) {
-      req.flash("error", JSON.stringify(error));
+  }
+  // 닉네임 중복 체크
+  if (originUsername !== bodyUsername) {
+    const userExists = await Users.exists({ bodyUsername });
+    if (userExists) {
+      req.flash("error", "같은 닉네임이 존재합니다.");
       return res.redirect(`/users/edit-profile`);
     }
+  }
+  const isHeroku = process.env.NODE_ENV === "production";
+  try {
+    const updatedUser = await Users.findByIdAndUpdate(
+      _id,
+      {
+        bodyUsername,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
+    return res.redirect(`/users/${_id}`);
+  } catch (error) {
+    req.flash("error", JSON.stringify(error));
+    return res.redirect(`/users/edit-profile`);
   }
 };
 
