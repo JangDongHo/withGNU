@@ -13,7 +13,7 @@ block content
             img(src=basicProfile)
           else
             if isHeroku
-              img(src=`${user.avatarUrl}`, crossorigin)
+              img(src=`${user.avatarUrl}`, crossorigin="anonymous")
             else
               img(src=`/${user.avatarUrl}`)
       else
@@ -21,7 +21,7 @@ block content
           img(src=basicProfile)
         else
           if isHeroku
-            img(src=`${user.avatarUrl}`, crossorigin)
+            img(src=`${user.avatarUrl}`, crossorigin="anonymous")
           else
             img(src=`/${user.avatarUrl}`)
     if String(id) === String(loggedInUser._id)
@@ -43,12 +43,12 @@ block content
             div.placeReview__headerInfo-wrapper
               if comment.place.photoUrl[0]
                 if isHeroku
-                  img(src=`${comment.place.photoUrl[0]}`, crossorigin)
+                  img(src=`${comment.place.photoUrl[0]}`, crossorigin="anonymous")
                 else
                   img(src=`/${comment.place.photoUrl[0]}`)
               else
                 if isHeroku
-                  img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin)
+                  img(src=`https://withgnu.s3.ap-northeast-2.amazonaws.com/basicPlaceImg.jpg`, crossorigin="anonymous")
                 else 
                   img(src="/uploads/basicPlaceImg.jpg")
               h1=comment.place.name
@@ -74,7 +74,7 @@ block content
           div.placeReview__images
             each image in comment.photoUrl
               if isHeroku
-                img(src=`${image}`, crossorigin)#commentImageBtn
+                img(src=`${image}`, crossorigin="anonymous")#commentImageBtn
               else
                 img(src=`/${image}`)#commentImageBtn
           p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
