@@ -11,7 +11,7 @@ block content
   div.placeImg-wrapper#headerImages
     each photo in place.photoUrl.reverse()
       if isHeroku
-        img.placeImg#headerImageBtn(src=`${photo}`, crossorigin)
+        img.placeImg#headerImageBtn(src=`${photo}`)
       else
         img.placeImg#headerImageBtn(src=`/${photo}`)
       

@@ -14,7 +14,7 @@ block content
                 img#previewImage(src="https://www.gnu.ac.kr/images/web/main/sub_cnt/btype_vi_img18.png")
               else
                 if isHeroku
-                  img#previewImage(src=`${user.avatarUrl}`, crossorigin)
+                  img#previewImage(src=`${user.avatarUrl}`)
                 else
                   img#previewImage(src=`/${user.avatarUrl}`)
             input(type="file" id="avartarImage", name="avartarImage" accept="image/jpg, image/jpeg, image/png")
