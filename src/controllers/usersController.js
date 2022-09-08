@@ -218,3 +218,11 @@ export const postEditPassword = async (req, res) => {
   req.flash("info", "비밀번호가 변경되었습니다.");
   return res.redirect(`/users/${_id}`);
 };
+
+export const privacyPolicy = (req, res) => {
+  return res.render("footer/privacyPolicy", { pageTitle: "개인정보처리방침" });
+};
+
+export const servicePolicy = (req, res) => {
+  return res.render("footer/servicePolicy", { pageTitle: "이용약관" });
+};

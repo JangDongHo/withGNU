@@ -5,8 +5,10 @@ import {
   getJoin,
   getLogin,
   postLogin,
+  privacyPolicy,
+  servicePolicy,
 } from "../controllers/usersController";
-import { publicOnlyMiddleware, avartarImgUpload } from "../middlewares";
+import { publicOnlyMiddleware } from "../middlewares";
 
 const rootRouter = express.Router();
 
@@ -22,5 +24,7 @@ rootRouter
   .get(getLogin)
   .post(postLogin);
 rootRouter.get("/search", search);
+rootRouter.get("/privacy-policy", privacyPolicy);
+rootRouter.get("/service-policy", servicePolicy);
 
 export default rootRouter;
