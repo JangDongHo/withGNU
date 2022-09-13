@@ -3,6 +3,8 @@ import morgan from "morgan";
 import session from "express-session";
 import flash from "express-flash";
 import MongoStore from "connect-mongo";
+import AdminJS from "adminjs";
+import AdminJSExpress from "@adminjs/express";
 import rootRouter from "./routers/rootRouter";
 import placesRouter from "./routers/placesRouter";
 import userRouter from "./routers/userRouter";
@@ -11,6 +13,12 @@ import apiRouter from "./routers/apiRouter";
 
 const app = express();
 const logger = morgan("dev");
+const adminJS = new AdminJS({
+  database: [],
+  rootPath: "/admin",
+});
+const adminRouter = AdminJSExpress.buildRouter(adminJS);
+app.use(adminJS.options.rootPath, adminRouter);
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use((req, res, next) => {
