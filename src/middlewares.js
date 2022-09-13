@@ -70,6 +70,18 @@ export const reviewRateLimit = rateLimit({
   },
 });
 
+export const authRateLimit = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 2,
+  handler: function (req, res, next) {
+    req.flash(
+      "error",
+      "너무 많은 작업을 요청하고 있습니다. 잠시 후 다시 시도해주세요."
+    );
+    return res.redirect(`/join`);
+  },
+});
+
 const placeImageFilter = (req, file, cb) => {
   const imagesSize = parseInt(req.headers["content-length"]);
   const typeArray = file.mimetype.split("/");

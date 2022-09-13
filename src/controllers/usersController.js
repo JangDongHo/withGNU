@@ -9,7 +9,7 @@ const generateRandom = (min, max) => {
 
 export const emailAuth = async (req, res) => {
   const pageTitle = "회원가입";
-  const { id, number, password, password2, username } = req.body;
+  const { id, number, password, password2, username, acceptPolicy } = req.body;
   // 3단계
   if (password && password2 && username) {
     const userExists = await Users.exists({ username });
@@ -56,6 +56,10 @@ export const emailAuth = async (req, res) => {
   }
   // 1단계
   else {
+    if (acceptPolicy !== "on") {
+      req.flash("error", "이용약관 및 개인정보취급방침에 동의하셔야 합니다.");
+      return res.status(400).render("users/join/join-1", { pageTitle });
+    }
     const email = id + "@gnu.ac.kr";
     const exists = await Users.exists({ email });
     if (exists) {
@@ -76,7 +80,6 @@ export const emailAuth = async (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          console.log(info);
           req.session.email = email;
           req.session.emailCode = randomNum;
           return res.render("users/join/join-2", { pageTitle });

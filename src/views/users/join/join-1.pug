@@ -9,6 +9,9 @@ block content
       div.input
         input(placeholder="아이디" name="id" type="text", required)
         span @gnu.ac.kr
+      div.policyAccept
+        input(type="checkbox" name="acceptPolicy" id="acceptPolicy" checked)
+        label(for="policy") <a href="/service-policy" style="color: #4286c2;">서비스 이용약관</a>과 <a href="/privacy-policy" style="color: #4286c2;">개인정보처리방침</a>에 동의합니다.
       button.submit 전송
     div.auth-switch
       span 이미 계정이 있으신가요? 

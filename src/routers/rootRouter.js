@@ -8,7 +8,7 @@ import {
   privacyPolicy,
   servicePolicy,
 } from "../controllers/usersController";
-import { publicOnlyMiddleware } from "../middlewares";
+import { publicOnlyMiddleware, authRateLimit } from "../middlewares";
 
 const rootRouter = express.Router();
 
@@ -17,7 +17,7 @@ rootRouter
   .route("/join")
   .all(publicOnlyMiddleware)
   .get(getJoin)
-  .post(emailAuth);
+  .post(authRateLimit, emailAuth);
 rootRouter
   .route("/login")
   .all(publicOnlyMiddleware)
