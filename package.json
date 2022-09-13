@@ -24,11 +24,13 @@
   "homepage": "https://JangDongHo.github.io/eatGNUv2",
   "dependencies": {
     "@adminjs/express": "^5.0.0",
+    "@adminjs/mongoose": "^3.0.0",
     "adminjs": "^6.2.3",
     "aws-sdk": "^2.895.0",
     "bcrypt": "^5.0.1",
     "cheerio": "^1.0.0-rc.10",
     "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.17.3",

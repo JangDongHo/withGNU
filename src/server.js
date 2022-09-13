@@ -3,8 +3,17 @@ import morgan from "morgan";
 import session from "express-session";
 import flash from "express-flash";
 import MongoStore from "connect-mongo";
+
+// AdminJS
 import AdminJS from "adminjs";
 import AdminJSExpress from "@adminjs/express";
+import AdminJSMongoose from "@adminjs/mongoose";
+import Users from "./models/Users";
+import Place from "./models/Place";
+import Comment from "./models/Comment";
+import bcrypt from "bcrypt";
+
+// Routers
 import rootRouter from "./routers/rootRouter";
 import placesRouter from "./routers/placesRouter";
 import userRouter from "./routers/userRouter";
@@ -13,11 +22,40 @@ import apiRouter from "./routers/apiRouter";
 
 const app = express();
 const logger = morgan("dev");
-const adminJS = new AdminJS({
-  database: [],
-  rootPath: "/admin",
+AdminJS.registerAdapter(AdminJSMongoose);
+const adminJSOptions = {
+  resources: [
+    {
+      resource: Users,
+      options: {
+        properties: {
+          password: {
+            type: "string",
+            isVisible: { list: false, edit: true, filter: false, show: false },
+          },
+        },
+      },
+    },
+    { resource: Place },
+    { resource: Comment },
+  ],
+};
+const adminJS = new AdminJS(adminJSOptions);
+const adminRouter = AdminJSExpress.buildAuthenticatedRouter(adminJS, {
+  authenticate: async (email, password) => {
+    const user = await Users.findOne({ email });
+    if (user) {
+      const matched =
+        (await bcrypt.compare(password, user.password)) &&
+        user.role === "admin";
+      if (matched) {
+        return user;
+      }
+    }
+    return false;
+  },
+  cookiePassword: process.env.COOKIE_SECRET,
 });
-const adminRouter = AdminJSExpress.buildRouter(adminJS);
 app.use(adminJS.options.rootPath, adminRouter);
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
