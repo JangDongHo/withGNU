@@ -81,6 +81,10 @@
           &[src] {
             content: "";
           }
+          @include tablet {
+            position: relative;
+            top: 100px;
+          }
         }
         .reviewUpload {
           position: absolute;

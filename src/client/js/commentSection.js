@@ -49,7 +49,7 @@ const previewImage = (event) => {
   console.log(images, index);
   let labelImage = images[index * 2];
   labelImage.style.display = "none";
-  if (index < 2) {
+  if (index < 3) {
     labelImage = images[index * 2 + 2];
     labelImage.style.display = "inline-block";
   }
@@ -67,7 +67,7 @@ const closeModal = () => {
   });
   // 이미지 업로드 버튼 초기화
   const labelImage = uploadImageBtn.querySelectorAll("label");
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     const image = labelImage[i];
     if (i === 0) image.style.display = "inline-block";
     else image.style.display = "none";

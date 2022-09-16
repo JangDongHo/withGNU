@@ -35,13 +35,15 @@ mixin reviewModal(place)
         textarea#inputBox(name="commentReview", placeholder=`${loggedInUser.username}님, ${place.name}에 대한 솔직한 리뷰를 작성해주세요!`, required)
         div.uploadBtns-wrapper
           div.upload-wrapper
-            label(for="commentImg1") 1
+            label(for="commentImg1") (0 / 3)
             input(type="file" id="commentImg1", name="commentImg1" accept="image/jpg, image/jpeg, image/png").commentImg
-            label.hidden(for="commentImg2") 2
+            label.hidden(for="commentImg2") (1 / 3)
             input(type="file" id="commentImg2", name="commentImg2" accept="image/jpg, image/jpeg, image/png").commentImg
-            label.hidden(for="commentImg3") 3
+            label.hidden(for="commentImg3") (2 / 3)
             input(type="file" id="commentImg3", name="commentImg3" accept="image/jpg, image/jpeg, image/png").commentImg
+            label.hidden (3 / 3)
           button(type="submit" disabled = "disabled").reviewUpload#reviewUploadBtn 리뷰 등록
-          img.previewImage#previewImage1
-          img.previewImage#previewImage2
-          img.previewImage#previewImage3
+          div
+            img.previewImage#previewImage1
+            img.previewImage#previewImage2
+            img.previewImage#previewImage3
