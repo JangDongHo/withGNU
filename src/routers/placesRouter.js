@@ -9,8 +9,11 @@ placesRouter
   .route("/:id([0-9a-f]{24})")
   .get(info)
   .post(
-    reviewRateLimit,
-    placeImgUpload.fields([{ name: "commentImg" }]),
+    placeImgUpload.fields([
+      { name: "commentImg1" },
+      { name: "commentImg2" },
+      { name: "commentImg3" },
+    ]),
     protectorMiddleware,
     createComment
   );

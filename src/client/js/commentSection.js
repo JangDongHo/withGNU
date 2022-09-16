@@ -8,6 +8,11 @@ const closeModalBtn = document.getElementById("closeReviewModalBtn");
 const reviewUploadBtn = document.getElementById("reviewUploadBtn");
 const reviewModalOverlay = document.getElementById("reviewModalOverlay");
 const reviewForm = document.querySelector("#reviewForm");
+const uploadImageBtn = modal.querySelector(".upload-wrapper");
+
+// 이미지 미리보기
+const commentImgs = document.querySelectorAll(".commentImg");
+const previewImages = document.querySelectorAll(".previewImage");
 
 const editBtns = document.querySelectorAll("#reviewEditBtn");
 const deleteBtns = document.querySelectorAll("#reviewDeleteBtn");
@@ -37,7 +42,40 @@ const handleSubmitBtn = () => {
   }
 };
 
+const previewImage = (event) => {
+  const { target } = event;
+  const images = Array.from(target.parentNode.children);
+  const index = Math.floor(images.indexOf(target) / 2);
+  console.log(images, index);
+  let labelImage = images[index * 2];
+  labelImage.style.display = "none";
+  if (index < 2) {
+    labelImage = images[index * 2 + 2];
+    labelImage.style.display = "inline-block";
+  }
+  const previewImage = document.getElementById(`previewImage${index + 1}`);
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    previewImage.setAttribute("src", e.target.result);
+  };
+  reader.readAsDataURL(event.target.files[0]);
+};
+
 const closeModal = () => {
+  previewImages.forEach((image) => {
+    image.removeAttribute("src");
+  });
+  // 이미지 업로드 버튼 초기화
+  const labelImage = uploadImageBtn.querySelectorAll("label");
+  for (let i = 0; i < 3; i++) {
+    const image = labelImage[i];
+    if (i === 0) image.style.display = "inline-block";
+    else image.style.display = "none";
+  }
+  commentImgs.forEach((img) => {
+    img.value = "";
+  });
+
   document.body.style.overflow = "visible";
   modal.classList.add("hidden");
 };
@@ -47,6 +85,9 @@ const openModal = async () => {
   if (!login) {
     window.location = `/login`;
   } else {
+    commentImgs.forEach((img) => {
+      img.addEventListener("change", previewImage);
+    });
     document.body.style.overflow = "hidden";
     modal.classList.remove("hidden");
     textarea.addEventListener("keyup", handleSubmitBtn);
@@ -86,6 +127,10 @@ const handleEditBtn = (event) => {
     window.location = `/places/${placeId}`;
   };
   const closeEditModal = () => {
+    // 미리보기 초기화
+    previewImages.forEach((image) => {
+      image.removeAttribute("src");
+    });
     reviewUploadBtn.setAttribute("type", "submit");
     textarea.value = "";
     reviewUploadBtn.removeEventListener("click", editComment);
@@ -93,12 +138,20 @@ const handleEditBtn = (event) => {
     document.body.style.overflow = "visible";
     modal.classList.add("hidden");
   };
+  const showPreviewImages = () => {
+    const images = review.childNodes[2].childNodes;
+    images.forEach((img, index) => {
+      const image = img.src;
+      const previewImage = document.getElementById(`previewImage${++index}`);
+      previewImage.setAttribute("src", image);
+    });
+  };
   const review = event.path[2];
+  showPreviewImages();
   const text = review.querySelector(".placeReview__content > span").innerText;
   const reviewId = review.dataset.reviewid;
   const oldReviewRating =
     review.querySelector(".rating-wrapper").dataset.rating;
-  const uploadImageBtn = modal.querySelector(".upload-wrapper");
   textarea.value = text;
   document.body.style.overflow = "hidden";
   modal.classList.remove("hidden");
@@ -107,7 +160,7 @@ const handleEditBtn = (event) => {
   reviewUploadBtn.addEventListener("click", editComment);
   textarea.addEventListener("keyup", handleSubmitBtn);
   closeModalBtn.addEventListener("click", closeEditModal);
-  reviewModalOverlay.addEventListener("click", closeModal);
+  reviewModalOverlay.addEventListener("click", closeEditModal);
 };
 
 const handleDeleteBtn = async (event) => {

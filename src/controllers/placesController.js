@@ -80,7 +80,7 @@ export const createComment = async (req, res) => {
     },
     body: { commentReview, commentRating },
     params: { id },
-    files: { commentImg },
+    files: { commentImg1, commentImg2, commentImg3 },
     fileValidationError,
   } = req;
   if (fileValidationError) {
@@ -88,12 +88,14 @@ export const createComment = async (req, res) => {
     return res.redirect(`/places/${id}`);
   } else {
     const filePaths = [];
+    console.log(commentImg1);
     const isHeroku = process.env.NODE_ENV === "production";
-    if (commentImg) {
-      for (let i = 0; i < commentImg.length; i++) {
-        filePaths.push(isHeroku ? commentImg[i].location : commentImg[i].path);
-      }
-    }
+    if (commentImg1)
+      filePaths.push(isHeroku ? commentImg1[0].location : commentImg1[0].path);
+    if (commentImg2)
+      filePaths.push(isHeroku ? commentImg2[0].location : commentImg2[0].path);
+    if (commentImg3)
+      filePaths.push(isHeroku ? commentImg3[0].location : commentImg3[0].path);
     try {
       const newComment = await Comment.create({
         text: commentReview,

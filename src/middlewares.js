@@ -87,8 +87,8 @@ const placeImageFilter = (req, file, cb) => {
   const typeArray = file.mimetype.split("/");
   const fileType = typeArray[1];
   const acceptFileType = ["jpg", "png", "jpeg"];
-  if (imagesSize >= 12 * 1024 * 1024) {
-    req.fileValidationError = "파일 크기가 너무 큽니다. (최대 12MB)";
+  if (imagesSize >= 16 * 1024 * 1024) {
+    req.fileValidationError = "파일 크기가 너무 큽니다. (최대 16MB)";
     return cb(null, false);
   }
   if (!acceptFileType.includes(fileType)) {

@@ -12,7 +12,7 @@
   .modal-contents {
     position: relative;
     width: 700px;
-    height: 500px;
+    height: 530px;
     background-color: white;
     z-index: 4;
     @include tablet {
@@ -36,7 +36,7 @@
         padding: 20px;
         border: solid $midgray;
         font-size: 16px;
-        margin-bottom: 45px;
+        margin-bottom: 25px;
         outline-color: $main;
         &::placeholder {
           color: lightgray;
@@ -72,6 +72,14 @@
           }
           input {
             display: none;
+          }
+        }
+        .previewImage {
+          width: 60px;
+          height: 60px;
+          content: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
+          &[src] {
+            content: "";
           }
         }
         .reviewUpload {
