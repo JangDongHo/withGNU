@@ -8,7 +8,6 @@ const closeModalBtn = document.getElementById("closeReviewModalBtn");
 const reviewUploadBtn = document.getElementById("reviewUploadBtn");
 const reviewModalOverlay = document.getElementById("reviewModalOverlay");
 const reviewForm = document.querySelector("#reviewForm");
-const uploadImageBtn = modal.querySelector(".upload-wrapper");
 
 // 이미지 미리보기
 const commentImgs = document.querySelectorAll(".commentImg");
@@ -66,6 +65,7 @@ const closeModal = () => {
     image.removeAttribute("src");
   });
   // 이미지 업로드 버튼 초기화
+  const uploadImageBtn = modal.querySelector(".upload-wrapper");
   const labelImage = uploadImageBtn.querySelectorAll("label");
   for (let i = 0; i < 4; i++) {
     const image = labelImage[i];
@@ -134,6 +134,7 @@ const handleEditBtn = (event) => {
     reviewUploadBtn.setAttribute("type", "submit");
     textarea.value = "";
     reviewUploadBtn.removeEventListener("click", editComment);
+    const uploadImageBtn = modal.querySelector(".upload-wrapper");
     uploadImageBtn.classList.remove("hidden");
     document.body.style.overflow = "visible";
     modal.classList.add("hidden");
