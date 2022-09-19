@@ -8,11 +8,11 @@
     border-radius: 20px;
     background-color: white;
     font-size: 1rem;
+    border: solid 2px gray;
     @include mobile {
       font-size: 12px;
     }
     color: gray;
-    border: solid black;
     transition-duration: 0.4s;
     cursor: pointer;
     &:hover {

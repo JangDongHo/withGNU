@@ -156,6 +156,7 @@ const handleEditBtn = (event) => {
   textarea.value = text;
   document.body.style.overflow = "hidden";
   modal.classList.remove("hidden");
+  const uploadImageBtn = modal.querySelector(".upload-wrapper");
   uploadImageBtn.classList.add("hidden");
   reviewUploadBtn.setAttribute("type", "button");
   reviewUploadBtn.addEventListener("click", editComment);
