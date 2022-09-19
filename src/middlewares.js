@@ -55,6 +55,16 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
+export const checkBannedMiddleware = (req, res, next) => {
+  const { role } = req.session.user;
+  if (role !== "block") {
+    return next();
+  } else {
+    req.flash("error", "계정이 정지된 상태입니다. 관리자에게 문의해주세요.");
+    return res.redirect("/");
+  }
+};
+
 export const expressRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,

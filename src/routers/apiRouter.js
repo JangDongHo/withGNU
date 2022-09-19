@@ -9,16 +9,22 @@ import {
   placeImgUpload,
   protectorMiddleware,
   deletePlaceImg,
+  checkBannedMiddleware,
 } from "../middlewares";
 
 const apiRouter = express.Router();
 
 apiRouter.post("/checkLogin", checkLogin);
-apiRouter.post("/places/:id([0-9a-f]{24})/scrap", placeScrap);
+apiRouter.post(
+  "/places/:id([0-9a-f]{24})/scrap",
+  checkBannedMiddleware,
+  placeScrap
+);
 apiRouter
   .route("/comments/:id([0-9a-f]{24})/edit")
   .all(protectorMiddleware)
   .post(
+    checkBannedMiddleware,
     placeImgUpload.fields([{ name: "commentImg", maxCount: 3 }]),
     editComment
   )

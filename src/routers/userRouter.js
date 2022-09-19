@@ -12,6 +12,7 @@ import {
   publicOnlyMiddleware,
   avartarImgUpload,
   deleteAvatarImg,
+  checkBannedMiddleware,
 } from "../middlewares";
 
 const userRouter = express.Router();
@@ -22,7 +23,12 @@ userRouter
   .route("/edit-profile")
   .all(protectorMiddleware)
   .get(getEditProfile)
-  .post(avartarImgUpload, deleteAvatarImg, postEditProfile);
+  .post(
+    checkBannedMiddleware,
+    avartarImgUpload,
+    deleteAvatarImg,
+    postEditProfile
+  );
 userRouter
   .route("/edit-password")
   .all(protectorMiddleware)
