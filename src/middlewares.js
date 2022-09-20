@@ -3,6 +3,7 @@ import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 import fs from "fs";
 import rateLimit from "express-rate-limit";
+import Users from "./models/Users";
 
 const s3 = new aws.S3({
   credentials: {
@@ -55,9 +56,10 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
-export const checkBannedMiddleware = (req, res, next) => {
-  const { role } = req.session.user;
-  if (role !== "block") {
+export const checkBannedMiddleware = async (req, res, next) => {
+  const { _id } = req.session.user;
+  const user = await Users.findById(_id);
+  if (user.role !== "block") {
     return next();
   } else {
     req.flash("error", "계정이 정지된 상태입니다. 관리자에게 문의해주세요.");
