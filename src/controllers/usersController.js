@@ -163,21 +163,22 @@ export const postEditProfile = async (req, res) => {
     fileValidationError,
     file,
   } = req;
-  // 허용하지 않는 파일일 경우
-  if (fileValidationError) {
-    req.flash("error", fileValidationError);
-    return res.redirect(`/users/edit-profile`);
-  }
-  // 닉네임 중복 체크
-  if (username !== avatarName) {
-    const userExists = await Users.exists({ username: avatarName });
-    if (userExists) {
-      req.flash("error", "같은 닉네임이 존재합니다.");
+  try {
+    // 허용하지 않는 파일일 경우
+    if (fileValidationError) {
+      req.flash("error", fileValidationError);
       return res.redirect(`/users/edit-profile`);
     }
-  }
-  const isHeroku = process.env.NODE_ENV === "production";
-  try {
+    // 닉네임 중복 체크
+    if (username !== avatarName) {
+      const userExists = await Users.exists({ username: avatarName });
+      if (userExists) {
+        req.flash("error", "같은 닉네임이 존재합니다.");
+        return res.redirect(`/users/edit-profile`);
+      }
+    }
+    const isHeroku = process.env.NODE_ENV === "production";
+
     const updatedUser = await Users.findByIdAndUpdate(
       _id,
       {
