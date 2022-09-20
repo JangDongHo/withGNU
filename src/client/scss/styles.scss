@@ -50,6 +50,10 @@ html {
   }
 }
 
+input::placeholder {
+  font-family: "Nanum+Gothic", sans-serif;
+}
+
 body {
   font-family: "Nanum+Gothic", sans-serif;
   color: black;

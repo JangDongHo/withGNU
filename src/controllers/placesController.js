@@ -182,7 +182,7 @@ export const deleteComment = async (req, res) => {
     body: { reviewRating, imagePaths },
   } = req;
   const comment = await Comment.findById(id).populate("place");
-  if (String(comment.owner) !== String(user._id)) {
+  if (String(comment.owner) !== String(user._id) && user.role !== "admin") {
     req.flash("error", "권한이 없습니다.");
     return res.status(403).redirect("/");
   }
@@ -204,7 +204,7 @@ export const deleteComment = async (req, res) => {
     },
     { new: true }
   );
-  await Users.findByIdAndUpdate(user._id, {
+  await Users.findByIdAndUpdate(comment.owner, {
     $pull: { comments: id.toString("hex") },
   });
   await Comment.findByIdAndDelete(id);

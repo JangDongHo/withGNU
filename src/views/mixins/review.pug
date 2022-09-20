@@ -42,7 +42,7 @@ mixin review(place)
           else
             img#commentImageBtn(src=`/${image}`)
       p.placeReview__date #{new Date(comment.createdAt).toLocaleDateString("ko-kr", {year: '2-digit', month: '2-digit', day: '2-digit'})}
-      if String(comment.owner.id) === String(loggedInUser._id)
+      if String(comment.owner.id) === String(loggedInUser._id) || loggedInUser.role === "admin"
         div.placeReview__action
           span.edit#reviewEditBtn 수정
           span.delete#reviewDeleteBtn 삭제
