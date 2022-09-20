@@ -7,7 +7,7 @@ block modal
 block content
   div.profile-wrapper
     div.profile-img
-      if String(id) === String(loggedInUser._id) || loggedInUser.role === "admin"
+      if String(id) === String(loggedInUser._id)
         a(href="/users/edit-profile")
           if user.avatarUrl === ""
             img(src=basicProfile)
@@ -24,7 +24,7 @@ block content
             img(src=`${user.avatarUrl}`)
           else
             img(src=`/${user.avatarUrl}`)
-    if String(id) === String(loggedInUser._id) || loggedInUser.role === "admin"
+    if String(id) === String(loggedInUser._id)
       a(href="/users/edit-profile")
         h1.profile-name=user.username
           i.fa-solid.fa-pen
